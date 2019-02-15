@@ -17,8 +17,8 @@ int Maximum_Sum_Subarray(int Arr[], int n)
                           break;
                       }
                   Sum += Arr[start_index + sub_array_size - 1]; //Value Of the sum is not computed again and again and instead stored.
-                  //Subtarcting 1 in the index because the array is zero-indexed.
-                  Ans = max(Ans, Sum); ////Update the value of sum accordingly.
+                                                                //Subtarcting 1 in the index because the array is zero-indexed.
+                  Ans = max(Ans, Sum); //Update the value of sum accordingly.
                 }
         }
     return Ans;
