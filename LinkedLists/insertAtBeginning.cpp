@@ -9,14 +9,14 @@ struct Node
     Node* Next;
 };
 
-Node* Head = NULL;
+Node* Head = NULL; //List is initially empty
 
 void insertAtBeginning(int x)
 {
-  Node* Temp = new Node();
-  Temp -> Data = x;
-  Temp -> Next = Head;
-  Head = Temp;
+  Node* Temp = new Node(); //Allocate memory to create a new node.
+  Temp -> Data = x; //Initialize the Data of the node to the parameter passed.
+  Temp -> Next = Head; //Store the address of the first node in the newly created node which will therafter be the first node.
+  Head = Temp; //The address of the new first node is stored in Head.
 }
 
 void printList()
