@@ -1,4 +1,4 @@
-//A program to reverse a linked list in an iterative method.
+//A program to reverse a linked list by an iterative method.
 # include <iostream>
 
 using namespace std;
