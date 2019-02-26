@@ -37,11 +37,11 @@ void printList()
       while(Temp != NULL)
         {
             cout << Temp -> Data << " ";
-            Temp = Temp ->Next;
+            Temp = Temp -> Next;
         }
 }
 
-int  main(void)
+int main(void)
 {
     insertAtEnd(3);
     insertAtEnd(5);
