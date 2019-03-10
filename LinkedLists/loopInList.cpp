@@ -1,4 +1,4 @@
-//An implementation of the Floyd's-Cycle finding algorithm to detect if a loop exists in a linked list.
+//An implementation of the Floyd's-Cycle finding algorithm to detect if a loop exists and to find the length of the loop in a linked list.
 # include <iostream>
 
 using namespace std;
@@ -10,6 +10,8 @@ struct Node
 };
 
 Node *Head = NULL; //List is initially empty.
+
+int lengthOfLoop(Node*);
 
 void insertAtEnd(int x)
 {
@@ -31,6 +33,10 @@ void insertAtEnd(int x)
   lastNode -> Next = Temp; //Set the address of the last node to the newly allocated node in memory.
 }
 
+/*
+Traverse linked list using two pointers.  Move one pointer by one and other pointer by two.  If these pointers meet at same node then there is a
+loop.  If pointers do not meet then linked list doesn’t have loop.
+*/
 int detectLoop(Node *A)
 {
     Node *Fast_Ptr = A;
@@ -41,12 +47,30 @@ int detectLoop(Node *A)
             Fast_Ptr = Fast_Ptr -> Next -> Next;
               if(Slow_Ptr == Fast_Ptr)
                 {
-                    cout << "\nLoop Exists In The Linked List.";
-                    return 1;
+                    cout << "\nLoop Exists In The Linked List." << endl;
+                    return lengthOfLoop(Slow_Ptr);
                 }
         }
-    cout << "\nLoop Does Not Exist In The Linked List.";
+    cout << "\nLoop Does Not Exist In The Linked List." << endl;
     return 0;
+}
+
+/*
+We store the address of this common point in a pointer variable say ptr. Then we initialize a counter with 1 and start from the common point and
+keeps on visiting next node and increasing the counter till we again reach the common point(ptr). At that point, the value of the counter will
+be equal to the length of the loop.
+*/
+int lengthOfLoop(Node *n) //n refers to one of the nodes present in the loop of the linked list.
+{
+    int Len = 1;
+    Node *Temp = n;
+      while(Temp -> Next != n)
+        {
+            Len++;
+            Temp = Temp -> Next;
+        }
+      return Len;
+
 }
 int main(void)
 {
@@ -55,7 +79,7 @@ int main(void)
     insertAtEnd(7);
     insertAtEnd(9);
     insertAtEnd(11);
-    //Head -> Next -> Next -> Next = Head; Test case to check if the loop exists in the linked list.
-    detectLoop(Head);
+    Head -> Next -> Next -> Next = Head; //Test case to check if the loop exists in the linked list.
+    cout << "The Length Of The Loop Is : "<< detectLoop(Head) << endl;
     return 0;
 }
