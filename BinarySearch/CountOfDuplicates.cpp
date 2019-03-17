@@ -35,7 +35,7 @@ int countOfDuplicates(int Arr[], int n, int x, bool firstSearch)
 int main(void)
 {
   int Array[] = {1, 1, 3, 3, 5, 5, 5 , 5, 5, 9, 9, 11};
-  int Size = sizeof(Array) / sizeof(Array[0]), Search;
+  int Size = sizeof(Array) / sizeof(Array[0]);
   int firstSearch = 5;
   int Low = countOfDuplicates(Array, Size, firstSearch, true);
     if(Low != -1)
