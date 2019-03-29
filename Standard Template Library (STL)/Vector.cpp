@@ -14,14 +14,14 @@ using namespace std;
 int main()
 {
     vector <int> v1, v2, v3 {1, 2, 3, 4, 5}; //Declaration of a vector
-    vector <int> ::iterator it1; //Declaration of an iterator to access a vector
+    vector <int> ::iterator it1; //Declaration of an iterator to access the elements of the vector
     vector <int> ::reverse_iterator it2; //A reverse iterator is used to access elements of a vector in the reverse dierection.
     vector <int> ::const_iterator it3; //A constant iterator is used to access vector elements without modifying them.
     vector <int> ::const_reverse_iterator it4; //A constant reverse iterator is used to access vector elements in the reverse dierection without
                                                //modifying them.
 
       for(int i = 1 ; i <=6 ; i++)
-        v1.push_back(i); //Pushing elements the end of a vector
+        v1.push_back(i); //Pushing elements to the end of a vector
       for(int j = 6 ; j >= 1 ; j--)
         v2.push_back(j);
 
@@ -62,9 +62,9 @@ int main()
     cout << a << " element of the vector : "<< v1.at(a); //Displays the ath element of the vector;
     cout << endl;
 
-    cout << "First element of the vector : " << v1.front();
+    cout << "First element of the vector : " << v1.front(); //Returns the value of the first element in the vector
     cout << endl;
-    cout << "Last element of the vector : " << v1.back();
+    cout << "Last element of the vector : " << v1.back(); //Returns the value of the last element in the vector
     cout << endl;
     //data() - Returns a direct pointer to the memory array used internally by the vector to store its own elements.
     int *Pos = v1.data();
