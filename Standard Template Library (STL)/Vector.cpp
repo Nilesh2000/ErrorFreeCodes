@@ -8,6 +8,8 @@ is linear in time.
 
 # include <iostream>
 # include <vector>
+# include <algorithm>
+
 using namespace std;
 int main()
 {
@@ -88,7 +90,9 @@ int main()
       cout << *it1 << " ";
     cout << endl;
 
-    v1.erase(v1.begin()); //Removes the element at the specified position
+    auto it = v1.begin(); //Auto keyword will automatically typecast the datatype for the required expression.
+    advance(it, 2); //Moving the iterator forward by 2 steps.
+    v1.erase(it); //Removes the element at the specified position
     cout << "After deletion at specified position : ";
     for(it1 = v1.begin() ; it1 != v1.end() ; it1++)
       cout << *it1 << " ";
@@ -106,11 +110,36 @@ int main()
       cout << *it1 << " ";
     cout << endl;
 
+    cout << "Vector in ascending order : ";
+    sort(v1.begin(), v1.end()); //Sort a vector in ascending order
+    for(it1 = v1.begin() ; it1 != v1.end() ; it1++)
+      cout << *it1 << " ";
     cout << endl;
+
+    cout << "Vector in descending order : ";
+    sort(v1.begin(), v1.end(), greater<int>()); //Sort a vector in descending order
+    for(it1 = v1.begin() ; it1 != v1.end() ; it1++)
+      cout << *it1 << " ";
     cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
+
+/*
+The range used is [first,last), which contains all the elements between first and last, including the element pointed by first but not the element
+pointed by last.
+Syntax:
+void reverse(BidirectionalIterator first, BidirectionalIterator last)
+BidirectionalIterator is an iterator that can be used to access any
+elements of a container in both forward and backward direction.
+*/
+    cout << "Reverse Of A Vector : ";
+    reverse(v1.begin() + 2, v1.end() - 1);
+    for(auto it : v1) //A novel method to display the elements of a vector.
+      cout << it << " ";
+    cout << "\n\t\t      ";
+
+    for(auto &it : v1) //Incase we use a reference to an iterator, changes to the vector elements wil be reflected.
+      {
+       it++;
+       cout << it << " ";
+     }
     return 0;
 }
