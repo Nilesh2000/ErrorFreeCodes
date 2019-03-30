@@ -15,6 +15,7 @@ bool odd(const int &num)
     return (num % 2);
 }
 
+
 int main(void)
 {
     list <int> l1, l2; //Declaration of a list
@@ -69,8 +70,14 @@ int main(void)
       cout << *it1 << " ";
     cout << endl;
 
-    cout << "Empty or not : " << l1.empty(); //Returns whether the list is empty(1) or not(0).
+    cout << "Size of the list is : "<< l1.size(); //Returns the number of elements in the list.
     cout << endl;
+
+    cout << "Maximum elements the list can hold : " << l1.max_size();;
+    cout << endl;
+
+    cout << "Empty or not : " << l1.empty(); //Returns whether the list is empty(1) or not(0).
+    cout << "\n\n";
 
     int p = 10;
     l1.insert(l1.begin(), p); //Used to insert the pth element at the specified position / address.
@@ -79,6 +86,23 @@ int main(void)
       cout << *it1 << " ";
     cout << endl;
 
+    cout << "List after resizing it to 5 elements : ";
+    l1.resize(5); //Used to resize a list container.
+    for(it1 = l1.begin() ; it1 != l1.end() ; it1++)
+      cout << *it1 << " ";
+    cout << endl;
+
+    cout << "List after resizing it to 6 elements : ";
+    l1.resize(6); //Used to resize a list container.
+    for(it1 = l1.begin() ; it1 != l1.end() ; it1++)
+      cout << *it1 << " ";
+    cout << endl;
+
+    cout << "List after resizing it to 8 elements and also assigning a value : ";
+    l1.resize(8, 9); //Used to resize a list container.
+    for(it1 = l1.begin() ; it1 != l1.end() ; it1++)
+      cout << *it1 << " ";
+    cout << endl;
 /*
 This function can be used to remove a single element or a range of elements from the specified list container.
 
@@ -144,25 +168,43 @@ function. The function iterates through every member of the list container and r
     l1.remove_if(odd); //Definition for odd on line 13.
     for(auto Iter : l1) //A novel method to display the elements of a vector.
       cout << Iter << " ";
+    cout << "\n\n";
+
+    //Creating two new lists
+    l1.erase(l1.begin(), l1.end());
+    l2.erase(l2.begin(), l2.end());
+
+
+    list <int> l {1, 2, 3};
+    for(int j = 12 ; j >= 10 ; j--)
+      l2.push_front(j);
+
+    l.swap(l2); //This function is used to swap the contents of one list with another list of same type and size.
+    cout << "After Swapping:-\n";
+    cout << "list 1 : ";
+    for(auto Iter : l)
+      cout << Iter << " ";
     cout << endl;
+
+    cout << "list 2 : ";
+    for(auto Iter : l2)
+      cout << Iter << " ";
+    cout << endl;
+
+    l2.merge(l); //Merges two lists. l2 is appended to the end of l1.
+    cout << "After merging two lists : ";
+    for(auto Iter : l2)
+      cout << Iter << " ";
+    cout << endl;
+
+    cout << "List after clearing : ";
+    l.clear(); //Used to clear the list. Makes the size 0.
+    for(auto Iter : l)
+      cout << Iter << " ";
 
     cout << endl;
     cout << endl;
     cout << endl;
     cout << endl;
-    cout << endl;
-    cout << endl;
-    
-    //Creating two new lists
-    l1.erase(l1.begin(), l1.end());
-    l2.erase(l2.begin(), l2.end());
-    for(int i = 1 ; i <= 5 ; i++)
-      l1.push_back(i);
-    for(int j = 10 ; j <= 12 ; j++)
-      l2.push_front(j);
-    l1.merge(l2); //Merges two lists. l2 is appended to the end of l1.
-    cout << "After merging two lists : ";
-    for(auto Iter : l1)
-      cout << Iter << " ";
     cout << endl;
 }
