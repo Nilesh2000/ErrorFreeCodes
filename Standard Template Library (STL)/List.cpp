@@ -1,7 +1,7 @@
 /*
 Lists are sequence containers that allow non-contiguous memory allocation. As compared to vector, list has slow traversal, but once a position has
 been found, insertion and deletion are quick. Normally, when we say a List, we talk about doubly linked list. For implementing a singly linked list,
-we use forward list.
+we use forward_list.
 */
 
 # include <iostream>
@@ -197,14 +197,70 @@ function. The function iterates through every member of the list container and r
       cout << Iter << " ";
     cout << endl;
 
+/*
+The list::splice() is a built-in function in C++ STL which is used to transfer elements from one list to another. The splice() function can be used
+in three ways:
+
+Transfer all the elements of list x into another list at some position.
+Transfer only the element pointed by i from list x into the list at some position.
+Transfers the range [first, last) from list x into another list at some position.
+*/
+
+    list <int> li1 = {1, 2, 3};
+    list <int> li2 = {4, 5};
+    list <int> li3 = {6, 7, 8};
+
+/*
+Parameters: The function accepts four parameters which are specified as below:
+
+position – Specifies the position where the elements are to be transfered.
+list2 – It specifies a list object of the same type which is to be transfered.
+i – It specifies an iterator to the position of an element in list2 which is to be transfered.
+first, last – Iterators specifying a range of elements in list2 which is to be transferred in list1. The range includes all the elements between
+first and last, including the element pointed by first but not the one pointed by last.
+Return value: This function does not returns anything.
+*/
+
+    // transfer all the elements of l2 to l1
+    li1.splice(li1.begin(), li2);
+
+    cout << "list 1 after splice operation : ";
+    for(auto x : li1)
+        cout << x << " ";
+
+    // transfer all the elements of l1 to l3
+    li3.splice(li3.begin(), li1);
+
+    cout << "\nlist 3 after splice operation : ";
+    for(auto x : li3)
+        cout << x << " ";
+    cout << endl;
+
+    for(int i = 1 ; i <= 3 ; i++)
+      li1.push_back(i);
+    for(int i = 4 ; i <= 5 ; i++)
+      li2.push_back(i);
+    //iterator pointing to 4.
+    it = li2.begin();
+    //transfer 4 at the end of l1
+    li1.splice(li1.end(), li2, it);
+    cout << "list 1 after splice operation : ";
+    for(auto x : li1)
+        cout << x << " ";
+    cout << endl;
+
+    it = li1.begin();
+    // advance the iterator by 2 positions
+    advance(it, 2);
+    li2.splice(li2.begin(), li2, it, li1.end());
+    cout << "list 2 after splice operation : ";
+    for(auto x : li2)
+        cout << x << " ";
+    cout << endl;
+
     cout << "List after clearing : ";
     l.clear(); //Used to clear the list. Makes the size 0.
     for(auto Iter : l)
       cout << Iter << " ";
-
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
     cout << endl;
 }
