@@ -68,6 +68,26 @@ void insertMenu()
     insertIntoList(Num, Pos);
 }
 
+void removeDuplicates()
+{
+    Node *Ptr1 = Head, *Ptr2, *Dup;
+    while(Ptr1 != NULL && Ptr1 -> Next != NULL)
+    {
+        Ptr2 = Ptr1;
+        if(Ptr1 -> Data == Ptr2 -> Next -> Data)
+        {
+            Dup = Ptr2 -> Next;
+            Ptr2 -> Next = Ptr2 -> Next -> Next;
+            delete(Dup);
+        }
+        else
+        {
+            Ptr2 = Ptr2 -> Next;
+        }
+        Ptr1 = Ptr1 -> Next;
+    }
+}
+
 void displayList()
 {
     if(Head == NULL)
@@ -88,12 +108,13 @@ void displayList()
 void Menu()
 {
     int Choice = 0;
-    while(Choice != 4)
+    while(Choice != 15)
       {
           cout << "\n1. Insert Into List"
-               << "\2. Count of Elements In The List"
-               << "\n2. Display The Elements Of The List"
-               << "\n3. Exit"
+               << "\n2. Count of Elements In The List"
+               << "\n3. Remove duplicates from the list"
+               << "\n4. Display The Elements Of The List"
+               << "\n5. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -104,10 +125,13 @@ void Menu()
               case 2 : cout << "\nThe number of elements in the list is : " << lengthOfList();
                         break;
 
-              case 3 : displayList();
+              case 3 : removeDuplicates();
                         break;
 
-              case 4 : exit(0);
+              case 4 : displayList();
+                        break;
+
+              case 5 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
