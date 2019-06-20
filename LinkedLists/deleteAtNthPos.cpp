@@ -36,7 +36,7 @@ void deleteAtPos(int Pos)
     Node *Temp1 = Head; //Set a temporary variable pointing to Head.
       if(Pos == 1) //If the first node is to be Deleted
         {
-            Head = Temp1 -> Next; //Head Is now inting to the second node since Temp1 -> Next stores the address of the
+            Head = Temp1 -> Next; //Head Is now pointing to the second node since Temp1 -> Next stores the address of the
                                   //second node in the linked list.
             free(Temp1); //Deallocate memory for the Node Temp1.
             return ;
