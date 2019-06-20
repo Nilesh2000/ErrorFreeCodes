@@ -173,6 +173,17 @@ void removeDuplicates()
     }
 }
 
+int middleOfList()
+{
+    Node *Slow_Ptr = Head, *Fast_Ptr = Head;
+    while(Fast_Ptr != NULL && Fast_Ptr -> Next != NULL)
+    {
+        Fast_Ptr = Fast_Ptr -> Next -> Next;
+        Slow_Ptr = Slow_Ptr -> Next;
+    }
+    return Slow_Ptr -> Data;
+}
+
 void displayList()
 {
     if(Head == NULL)
@@ -200,8 +211,9 @@ void Menu()
                << "\n2. Delete From List"
                << "\n3. Count of Elements In The List"
                << "\n4. Remove duplicates from the list"
-               << "\n5. Display The Elements Of The List"
-               << "\n6. Exit"
+               << "\n5. Display middle element of the list"
+               << "\n6. Display The Elements Of The List"
+               << "\n7. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -218,10 +230,13 @@ void Menu()
               case 4 : removeDuplicates();
                         break;
 
-              case 5 : displayList();
+              case 5 : cout << "\nThe middle element of the list is : " << middleOfList() << endl;
                         break;
 
-              case 6 : exit(0);
+              case 6 : displayList();
+                        break;
+
+              case 7 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
