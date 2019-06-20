@@ -68,6 +68,91 @@ void insertMenu()
     insertIntoList(Num, Pos);
 }
 
+void deleteByPos(int n)
+{
+    Node *Temp1 = Head;
+    if(n == 1)
+    {
+        Head = Temp1 -> Next;
+        delete Temp1;
+        return ;
+    }
+    for(int i = 1 ; i < n - 1 ; i++)
+    {
+        Temp1 = Temp1 -> Next;
+    }
+    Node *Temp2 = Temp1 -> Next;
+    Temp1 -> Next = Temp2 -> Next;
+    delete Temp2;
+}
+
+void deletePosMenu()
+{
+    int Choice, Pos;
+    cout << "\n1. Delete at the beginning"
+         << "\n2. Delete at Nth Position"
+         << "\n3. Delete at the end"
+         << "\nYour choice is : ";
+    cin >> Choice;
+    switch(Choice)
+    {
+        case 1 : Pos = 1;
+                  break;
+
+        case 2 : cout << "\nEnter Position For Deletion : ";
+                 cin >> Pos;
+                  break;
+
+        case 3 : Pos = lengthOfList();
+                  break;
+    }
+    deleteByPos(Pos);
+}
+
+void deleteData(int x)
+{
+    Node *Temp = Head, *Prev;
+    if(Temp != NULL && Temp -> Data == x)
+    {
+        Head = Temp -> Next;
+        delete Temp;
+        return ;
+    }
+    while(Temp != NULL && Temp -> Data != x)
+    {
+            Prev = Temp;
+            Temp = Temp -> Next;
+    }
+    if(Temp == NULL)
+    {
+        cout << "\nElement not found in the list.";
+        return ;
+    }
+    Prev -> Next = Temp -> Next;
+    delete Temp;
+}
+
+void deleteMenu()
+{
+    int Choice, Num;
+    cout << "\n1. Delete By Position"
+         << "\n2. Delete By Element"
+         << "\nYour choice is : ";
+    cin >> Choice;
+    switch(Choice)
+    {
+        case 1 : deletePosMenu();
+                  break;
+
+        case 2 : cout << "\nEnter the element to delete : ";
+                 cin >> Num;
+                 deleteData(Num);
+                  break;
+
+        default : cout << "\nInvalid choice.";
+    }
+}
+
 void removeDuplicates()
 {
     Node *Ptr1 = Head, *Ptr2, *Dup;
@@ -105,16 +190,18 @@ void displayList()
     }
     cout << endl;
 }
+
 void Menu()
 {
     int Choice = 0;
-    while(Choice != 15)
+    while(1)
       {
           cout << "\n1. Insert Into List"
-               << "\n2. Count of Elements In The List"
-               << "\n3. Remove duplicates from the list"
-               << "\n4. Display The Elements Of The List"
-               << "\n5. Exit"
+               << "\n2. Delete From List"
+               << "\n3. Count of Elements In The List"
+               << "\n4. Remove duplicates from the list"
+               << "\n5. Display The Elements Of The List"
+               << "\n6. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -122,16 +209,19 @@ void Menu()
               case 1 : insertMenu();
                         break;
 
-              case 2 : cout << "\nThe number of elements in the list is : " << lengthOfList();
+              case 2 : deleteMenu();
                         break;
 
-              case 3 : removeDuplicates();
+              case 3 : cout << "\nThe number of elements in the list is : " << lengthOfList() - 1 << endl;
                         break;
 
-              case 4 : displayList();
+              case 4 : removeDuplicates();
                         break;
 
-              case 5 : exit(0);
+              case 5 : displayList();
+                        break;
+
+              case 6 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
