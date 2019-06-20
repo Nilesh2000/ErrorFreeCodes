@@ -37,9 +37,9 @@ void insertAtPos(int x, int n) //Pass the value to be stored and the location to
             Temp2 = Temp2 -> Next; //Traverse the linked list.
         }
 
-    //Linked list has been traversed till the ( n - 1 )st node.
-    Temp1 -> Next = Temp2 -> Next; //Store the address of ( n - 1 )st node to the memory Allocated node Temp1 because the (n - 1)th node is
-                                   //currently storing the address of the nth node.
+    //Linked list has been traversed till the ( n - 1 )th node.
+    Temp1 -> Next = Temp2 -> Next; //Store the address of ( n - 1 )th node to the memory Allocated node Temp1 because the (n - 1)th node
+                                   //is currently storing the address of the nth node.
     Temp2 -> Next = Temp1; //Store the addrss of the newly created node in the previous node.
 }
 
@@ -48,7 +48,7 @@ void printList()
     Node* Temp = Head;
       while(Temp != NULL)
         {
-            cout << Temp -> Data << " " ;
+            cout << Temp -> Data << " " << Temp -> Next << endl;
             Temp = Temp -> Next;
         }
     cout << endl;
@@ -61,5 +61,6 @@ int main(void)
     insertAtPos(4, 1);
     insertAtPos(5, 2);
     printList();
+    cout << Head;
     return 0;
 }
