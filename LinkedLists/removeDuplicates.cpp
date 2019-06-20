@@ -17,7 +17,7 @@ void removeDuplicates()
     Node *Ptr1 = Head, *Ptr2, *Dup; //Declare 3 pointers
     //Ptr1 to traverse the list, Ptr2 to compare every element of the list, Dup to delete the pointer which is a duplicate.
 
-      while(Ptr1 != NULL && Ptr1 -> Next != NULL) //Condition so that the while loop is executed only till the (n-1)th element of the list.
+      while(Ptr1 != NULL && Ptr1 -> Next != NULL) //Condition so that the while loop is executed only till the (n - 1)th element of the list.
         {
             Ptr2 = Ptr1; //Set Ptr2 to Ptr1 so that Ptr2 can be used to check for duplicates.
               while(Ptr2 -> Next != NULL) //Go till the nth node of the linked list.
@@ -26,6 +26,7 @@ void removeDuplicates()
                       {
                           Dup = Ptr2 -> Next; //Set the Node to be deleted as Dup
                           Ptr2 -> Next = Ptr2 -> Next -> Next; //We use next twice here because we intened to delete the duplicate element.
+                                                               //And hence, we continue to traverse the list.
                           delete(Dup); //Delete the duplicate node.
                       }
                     else
@@ -33,7 +34,7 @@ void removeDuplicates()
                           Ptr2 = Ptr2 -> Next; //Else just go to the next element in the list.
                       }
                 }
-            Ptr1 = Ptr1 -> Next;
+            Ptr1 = Ptr1 -> Next; //Keep traversing the list after each iteration.
         }
 }
 
