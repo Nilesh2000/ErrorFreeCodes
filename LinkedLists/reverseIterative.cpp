@@ -59,7 +59,6 @@ void printList()
 
 int main(void)
 {
-    int n;
     insertAtEnd(2);
     insertAtEnd(3);
     insertAtEnd(5);
