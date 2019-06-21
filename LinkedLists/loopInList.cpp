@@ -69,8 +69,7 @@ int lengthOfLoop(Node *n) //n refers to one of the nodes present in the loop of 
             Len++;
             Temp = Temp -> Next;
         }
-      return Len;
-
+    return Len;
 }
 int main(void)
 {
