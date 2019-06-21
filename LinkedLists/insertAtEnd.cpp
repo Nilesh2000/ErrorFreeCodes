@@ -47,4 +47,5 @@ int main(void)
     insertAtEnd(5);
     insertAtEnd(7);
     printList();
+    return 0;
 }
