@@ -292,6 +292,7 @@ void isListPalindrome()
         s.push(Temp -> Data);
         Temp = Temp -> Next;
     }
+    Temp = Head;
     while(Temp != NULL)
     {
         int Top = s.top();
