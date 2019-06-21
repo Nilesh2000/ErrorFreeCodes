@@ -1,5 +1,6 @@
 # include <iostream>
 # include <cstdio>
+# include <stack>
 
 using namespace std;
 
@@ -236,6 +237,23 @@ void displayList()
     cout << endl;
 }
 
+void nthNodeFromLast(int n)
+{
+    Node *Ref_Ptr = Head, *Main_Ptr = Head;
+    int Count = 1;
+    while(Count <= n)
+    {
+        Ref_Ptr = Ref_Ptr -> Next;
+        Count++;
+    }
+    while(Ref_Ptr != NULL)
+    {
+        Ref_Ptr = Ref_Ptr -> Next;
+        Main_Ptr = Main_Ptr -> Next;
+    }
+    cout << "\nThe nth node from the last is : " << Main_Ptr -> Data << endl;
+}
+
 int lengthOfLoop(Node *n)
 {
     int lenOfLoop = 1;
@@ -250,8 +268,8 @@ int lengthOfLoop(Node *n)
 
 void detectLoop()
 {
-    Node *Slow_Ptr = Head, Fast_Ptr = Head;
-    while(Fast_Ptr != NULL && Fast_Ptr -> Next = NULL)
+    Node *Slow_Ptr = Head, *Fast_Ptr = Head;
+    while(Fast_Ptr != NULL && Fast_Ptr -> Next != NULL)
     {
         Slow_Ptr = Slow_Ptr -> Next;
         Fast_Ptr = Fast_Ptr -> Next;
@@ -262,6 +280,52 @@ void detectLoop()
         }
     }
   cout << "\nNo loop exists in the linked list." << endl;
+}
+
+void isListPalindrome()
+{
+    Node *Temp = Head;
+    stack <int> s;
+    bool isPalindrome = true;
+    while(Temp != NULL)
+    {
+        s.push(Temp -> Data);
+        Temp = Temp -> Next;
+    }
+    while(Temp != NULL)
+    {
+        int Top = s.top();
+        s.pop();
+        if(Temp -> Data == Top)
+        {
+            isPalindrome = true;
+        }
+        else
+        {
+            isPalindrome = false;
+             break;
+        }
+        Temp = Temp -> Next;
+    }
+    if(isPalindrome)
+    {
+        cout << "\nThe linked list is a palindrome." << endl;
+    }
+    else
+    {
+        cout << "\nThe linked list is not a palindrome." << endl;
+    }
+}
+
+void deleteList()
+{
+    Node *Cur = Head, *Next;
+    while(Cur != NULL)
+    {
+        Next = Cur -> Next;
+        delete Cur;
+        Cur = Next;
+    }
 }
 
 void Menu()
@@ -276,8 +340,11 @@ void Menu()
                << "\n5. Reverse the list"
                << "\n6. Display middle element of the list"
                << "\n7. Display The Elements Of The List"
-               << "\n8. Check for loop in list"
-               << "\n9. Exit"
+               << "\n8. Display Nth node from the last"
+               << "\n9. Check for loop in list"
+               << "\n10. Check is the list is a palindrome"
+               << "\n11. Delete the list"
+               << "\n12. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -303,10 +370,22 @@ void Menu()
               case 7 : displayList();
                         break;
 
-              case 8 : detectLoop();
+              case 8 : int Pos;
+                       cout << "\nEnter the value of n : ";
+                       cin >> Pos;
+                       nthNodeFromLast(Pos);
                         break;
 
-              case 9 : exit(0);
+              case 9 : detectLoop();
+                        break;
+
+              case 10 : isListPalindrome();
+                         break;
+
+              case 11 : deleteList();
+                         break;
+
+              case 12 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
