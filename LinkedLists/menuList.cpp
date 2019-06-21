@@ -163,7 +163,7 @@ void removeDuplicates()
         {
             Dup = Ptr2 -> Next;
             Ptr2 -> Next = Ptr2 -> Next -> Next;
-            delete(Dup);
+            delete Dup;
         }
         else
         {
@@ -173,7 +173,7 @@ void removeDuplicates()
     }
 }
 
-void reverseIterative()
+void reverseIterate()
 {
     Node *Prev, *Cur, *Next;
     Prev = NULL;
@@ -200,7 +200,7 @@ void reverseMenu()
         case 1 : reverseIterate();
                   break;
 
-        case 2 : reverseRecursive();
+        case 2 : //reverseRecursive();
                   break;
 
         default : cout << "\nInvalid choice.";
@@ -236,6 +236,34 @@ void displayList()
     cout << endl;
 }
 
+int lengthOfLoop(Node *n)
+{
+    int lenOfLoop = 1;
+    Node *Temp = n;
+    while(Temp -> Next != n)
+    {
+        lenOfLoop++;
+        Temp = Temp -> Next;
+    }
+    return lenOfLoop;
+}
+
+void detectLoop()
+{
+    Node *Slow_Ptr = Head, Fast_Ptr = Head;
+    while(Fast_Ptr != NULL && Fast_Ptr -> Next = NULL)
+    {
+        Slow_Ptr = Slow_Ptr -> Next;
+        Fast_Ptr = Fast_Ptr -> Next;
+        if(Slow_Ptr == Fast_Ptr)
+        {
+            cout << "\nA loop exists in the list and it's length is : " << lengthOfLoop(Slow_Ptr) << endl;
+            return ;
+        }
+    }
+  cout << "\nNo loop exists in the linked list." << endl;
+}
+
 void Menu()
 {
     int Choice = 0;
@@ -248,7 +276,8 @@ void Menu()
                << "\n5. Reverse the list"
                << "\n6. Display middle element of the list"
                << "\n7. Display The Elements Of The List"
-               << "\n8. Exit"
+               << "\n8. Check for loop in list"
+               << "\n9. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -274,7 +303,10 @@ void Menu()
               case 7 : displayList();
                         break;
 
-              case 8 : exit(0);
+              case 8 : detectLoop();
+                        break;
+
+              case 9 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
