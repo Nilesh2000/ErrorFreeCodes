@@ -173,6 +173,21 @@ void removeDuplicates()
     }
 }
 
+void reverseIterative()
+{
+    Node *Prev, *Cur, *Next;
+    Prev = NULL;
+    Cur = Head;
+    while(Cur != NULL)
+    {
+        Next = Cur -> Next;
+        Cur -> Next = Prev;
+        Prev = Cur;
+        Cur = Next;
+    }
+    Head = Prev;
+}
+
 void reverseMenu()
 {
     int Choice;
