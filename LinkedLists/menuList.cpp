@@ -173,6 +173,25 @@ void removeDuplicates()
     }
 }
 
+void reverseMenu()
+{
+    int Choice;
+    cout << "\n1. Reverse Using Iteration"
+         << "\n2. Reverse Using Recursion"
+         << "\nYour choice is : ";
+    cin >> Choice;
+    switch(Choice)
+    {
+        case 1 : reverseIterate();
+                  break;
+
+        case 2 : reverseRecursive();
+                  break;
+
+        default : cout << "\nInvalid choice.";
+    }
+}
+
 int middleOfList()
 {
     Node *Slow_Ptr = Head, *Fast_Ptr = Head;
@@ -211,9 +230,10 @@ void Menu()
                << "\n2. Delete From List"
                << "\n3. Count of Elements In The List"
                << "\n4. Remove duplicates from the list"
-               << "\n5. Display middle element of the list"
-               << "\n6. Display The Elements Of The List"
-               << "\n7. Exit"
+               << "\n5. Reverse the list"
+               << "\n6. Display middle element of the list"
+               << "\n7. Display The Elements Of The List"
+               << "\n8. Exit"
                << "\nYour choice is : ";
           cin >> Choice;
           switch(Choice)
@@ -230,13 +250,16 @@ void Menu()
               case 4 : removeDuplicates();
                         break;
 
-              case 5 : cout << "\nThe middle element of the list is : " << middleOfList() << endl;
+              case 5 : reverseMenu();
                         break;
 
-              case 6 : displayList();
+              case 6 : cout << "\nThe middle element of the list is : " << middleOfList() << endl;
                         break;
 
-              case 7 : exit(0);
+              case 7 : displayList();
+                        break;
+
+              case 8 : exit(0);
 
               default : cout << "\nInvalid choice.\n";
           }
