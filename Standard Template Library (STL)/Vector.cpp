@@ -131,7 +131,7 @@ BidirectionalIterator is an iterator that can be used to access any
 elements of a container in both forward and backward direction.
 */
     cout << "Reverse Of A Vector : ";
-    reverse(v1.begin() + 2, v1.end() - 1);
+    reverse(v1.begin() + 2, v1.end() - 1); //Reverse the elements only of the sub-vector.
     for(auto it : v1) //A novel method to display the elements of a vector.
       cout << it << " ";
     cout << "\n\t\t      ";
