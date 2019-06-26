@@ -53,6 +53,18 @@ int lengthOfList(Node *A)
   return 1 + lengthOfList(A -> Next); //Count is 1 + length of the remaining list.
 }
 
+int oddOrEvenLength(Node *A)
+{
+    while(A != NULL && A -> Next != NULL)
+    {
+        A = A -> Next -> Next;
+    }
+    if(!A)
+      return 0;
+    else
+      return 1;
+}
+
 void printList()
 {
     Node *Temp = Head;
@@ -69,7 +81,12 @@ int  main(void)
     insertAtEnd(5);
     insertAtEnd(7);
     insertAtEnd(9);
+    //insertAtEnd(11);
     printList();
     cout << "\nThe Length Of The Linked List Is : " << lengthList(Head) << endl;
     cout << "The Length Of The Linked List Is : " << lengthOfList(Head) << endl;
+    if(oddOrEvenLength(Head) == 0)
+      cout << "Even number of elements in the list.";
+    else
+      cout << "Odd number of elements in the list.";
 }
