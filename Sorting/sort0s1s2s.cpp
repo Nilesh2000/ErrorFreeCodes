@@ -1,4 +1,7 @@
-# include <bits/stdc++.h>
+//A program to sort an array consisting of only 0s, 1s and 2s in ascending order.
+//Time Complexity : O(n)
+//Space Complexity : O(1)
+# include <iostream>
 
 using namespace std;
 
@@ -32,19 +35,17 @@ void sort0s1s2s(int Arr[], int n)
             switch(Arr[Mid])
               {
                   case 0 :
-                           swap(Arr[Low], Arr[Mid]);
-                           Low++;
-                           Mid++;
+                           swap(Arr[Low++], Arr[Mid++]);
                             break;
                   case 1 :
                            Mid++;
                             break;
                   case 2 :
-                           swap(Arr[Mid], Arr[High]);
-                           High--;
+                           swap(Arr[Mid], Arr[High--]);
                             break;
               }
         }
+    cout << "\nSorted Array : ";
     for(int i = 0 ; i < n ; i++)
       cout << Arr[i] << " ";
 }
