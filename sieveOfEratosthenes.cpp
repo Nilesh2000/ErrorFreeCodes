@@ -1,3 +1,5 @@
+// A program to implement the Sieve Of Eratosthenes algorithm.
+//Time Complexity : O(n log n log n)
 # include <iostream>
 # include <string.h>
 
