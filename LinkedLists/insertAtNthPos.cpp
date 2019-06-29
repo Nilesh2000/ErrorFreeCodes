@@ -48,7 +48,7 @@ void printList()
     Node* Temp = Head;
       while(Temp != NULL)
         {
-            cout << Temp -> Data << " " << Temp -> Next << endl;
+            cout << Temp -> Data << " ";
             Temp = Temp -> Next;
         }
     cout << endl;
@@ -61,6 +61,5 @@ int main(void)
     insertAtPos(4, 1);
     insertAtPos(5, 2);
     printList();
-    cout << Head;
     return 0;
 }
