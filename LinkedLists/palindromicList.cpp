@@ -73,6 +73,7 @@ int main(void) //Driver function
     insertAtEnd(1);
     insertAtEnd(2);
     insertAtEnd(3);
+    //insertAtEnd(1);
     isListPalindrome();
     return 0;
 }
