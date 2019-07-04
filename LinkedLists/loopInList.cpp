@@ -37,7 +37,7 @@ void insertAtEnd(int x)
 Traverse linked list using two pointers.  Move one pointer by one and other pointer by two.  If these pointers meet at same node then there is a
 loop.  If pointers do not meet then linked list doesn’t have loop.
 */
-int detectLoop(Node *A)
+void detectLoop(Node *A)
 {
     Node *Fast_Ptr = A;
     Node *Slow_Ptr = A;
@@ -48,11 +48,11 @@ int detectLoop(Node *A)
               if(Slow_Ptr == Fast_Ptr)
                 {
                     cout << "\nLoop Exists In The Linked List." << endl;
-                    return lengthOfLoop(Slow_Ptr);
+                    cout << "The Length Of the loop is : " << lengthOfLoop(Slow_Ptr) << endl;
+                    return ;
                 }
         }
     cout << "\nLoop Does Not Exist In The Linked List." << endl;
-    return 0;
 }
 
 /*
@@ -79,6 +79,6 @@ int main(void)
     insertAtEnd(9);
     insertAtEnd(11);
     Head -> Next -> Next -> Next = Head; //Test case to check if the loop exists in the linked list.
-    cout << "The Length Of The Loop Is : "<< detectLoop(Head) << endl;
+    detectLoop(Head);
     return 0;
 }
