@@ -1,7 +1,9 @@
+//A program to rotate a 2-dimensional matrix in the clockwise dierection.
 # include <iostream>
 
 using namespace std;
 
+//Function to print the matrix
 void printMatrix(int Arr[][3])
 {
     for(int i = 0 ; i < 3 ; i++)
@@ -14,6 +16,8 @@ void printMatrix(int Arr[][3])
     }
 }
 
+//The idea here is to first transpose the existing matrix and then reverse the rows of the result transpose matrix. In this way, we get a matrix which has been
+//rotated in the clockwise dierection by 90 degrees.
 void rotateClockwise(int Arr[][3])
 {
     int Transpose[3][3];
@@ -38,6 +42,7 @@ void rotateClockwise(int Arr[][3])
     printMatrix(Transpose);
 }
 
+//Driver function
 int main(void)
 {
     int Mat[3][3] = {
@@ -49,3 +54,4 @@ int main(void)
     rotateClockwise(Mat);
     return 0;
 }
+//End of program
