@@ -25,7 +25,7 @@ As a result, this explains that they would have to meet at the cycle beginning a
 tortoise just arrived at the cycle after m steps and it could never see hare which was already in the cycle).
 Now we know that the number of steps we need to move them until they meet turns out to be the distance from the beginning of the list to the cycle beginning,
  m. Of course, the algorithm does not need to know what m is. It will just move both tortoise and hare one step at a time until they meet. The meeting point
-has to be the cycle start and the number of steps must be the distance (m) to the cycle beginning. 
+has to be the cycle start and the number of steps must be the distance (m) to the cycle beginning.
 */
 # include <iostream>
 
