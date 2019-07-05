@@ -51,6 +51,7 @@ int main(void)
                     {7, 8, 9}
                     };
     printMatrix(Mat);
+    cout << "\nMatrix after rotating in clockwise dierection:-\n"
     rotateClockwise(Mat);
     return 0;
 }
