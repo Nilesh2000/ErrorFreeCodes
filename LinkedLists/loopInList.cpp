@@ -121,6 +121,8 @@ int main(void)
     insertAtEnd(9);
     insertAtEnd(11);
     Head -> Next -> Next -> Next -> Next = Head -> Next; //Test case to check if the loop exists in the linked list.
+    //Linked list is 3 -> 5 -> 7 -> 9 -> 11. (5, 7, 9 are the loop of the linked list)
+    //                    |    <-   |
     detectLoop(Head);
     return 0;
 }
