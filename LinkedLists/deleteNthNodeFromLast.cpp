@@ -53,16 +53,20 @@ int lengthOfList()
     return Count;
 }
 
+//The idea here is to maintain two pointers, namely a reference pointer and another main pointer. Move the reference pointer n nodes from the head. Then, start
+//moving the main pointer from the head and the reference pointer simultaneously until the reference pointer till the reference pointer reaches the end of the
+//list. During this process, keep a track of the previous pointer of Main_Ptr as we need to set Prev_Ptr -> next to Main_ptr -> next for the deletion to occur.
 void deleteNthNodeFromEnd(int Pos)
 {
     Node *Main_Ptr = Head, *Ref_Ptr = Head, *Prev;
-    if(Pos == lengthOfList())
+    //The head node is the last node from the end of the list.
+    if(Pos == lengthOfList()) //If asked to delete head node,
     {
-        Head = Main_Ptr -> Next;
-        delete Main_Ptr;
-        return ;
+        Head = Main_Ptr -> Next; //Store the address of the second node in Head.
+        delete Main_Ptr; //Delete the memory for the first node.
+        return ; //Exit from the function.
     }
-    for(int i = 0 ; i < Pos - 1 ; i++)
+    for(int i = 0 ; i < Pos - 1 ; i++) 
       Ref_Ptr = Ref_Ptr -> Next;
     while(Ref_Ptr -> Next != NULL)
     {
@@ -74,6 +78,7 @@ void deleteNthNodeFromEnd(int Pos)
     delete Main_Ptr;
 }
 
+//Driver function
 int main(void)
 {
     insertAtEnd(1);
@@ -88,3 +93,4 @@ int main(void)
     printList();
     return 0;
 }
+//End of program
