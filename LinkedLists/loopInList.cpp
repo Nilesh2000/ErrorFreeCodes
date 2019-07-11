@@ -1,4 +1,5 @@
-//An implementation of the Floyd's-Cycle finding algorithm to detect if a loop exists and to find the length of the loop in a linked list.
+//An implementation of the Floyd's-Cycle finding algorithm to detect if a loop exists. if exists, find the length of the loop and the starting point of the
+//loop. Also, remove the loop from the list.
 
 /*
 Explaination :-
@@ -62,10 +63,47 @@ void insertAtEnd(int x)
   lastNode -> Next = Temp; //Set the address of the last node to the newly allocated node in memory.
 }
 
+void printList()
+{
+    Node *Temp = Head;
+      while(Temp != NULL)
+        {
+            cout << Temp -> Data << " ";
+            Temp = Temp -> Next;
+        }
+}
+
+
+//The idea here is to hava two pointers Ptr1 and Ptr2 pointing to Head and loopNode(Node where Slow_Ptr and Fast_Ptr met) respectively.
+void removeLoop(Node *loopNode)
+{
+    Node *Ptr1, *Ptr2;
+    Ptr1 = Head;
+    while(1)
+    {
+        Ptr2 = loopNode;
+        //Start traversing the list from loopNode and check if it ever reaches Ptr2.
+        while(Ptr2 -> Next != loopNode && Ptr2 -> Next != Ptr1)
+        {
+            Ptr2 = Ptr2 -> Next;
+        }
+        //If Ptr2 ever reaches Ptr1, break out of the loop. Thus, Ptr2 will be the last node of the list.
+        if(Ptr2 -> Next == Ptr1)
+        {
+            break;
+        }
+        //If Ptr2 didn'd reach Ptr1 after one loop, move Ptr1 forward by one node.
+        Ptr1 = Ptr1 -> Next;
+    }
+    //After the end of loop ptr2 is the last node of the loop. So make next of ptr2 as NULL
+    Ptr2 -> Next = NULL;
+}
+
 /*
 Traverse linked list using two pointers.  Move one pointer by one noce and other pointer by two nodes.  If these pointers meet at same node,  then there is a
 loop.  If pointers do not meet then linked list doesn’t have a loop.
 */
+
 void detectLoop(Node *A)
 {
     Node *Fast_Ptr = A;
@@ -79,6 +117,10 @@ void detectLoop(Node *A)
                     cout << "\nLoop Exists In The Linked List.";
                     cout << "\nThe Length Of the loop is : " << lengthOfLoop(Slow_Ptr);
                     cout << "\nThe first node of the cycle is : " << firstNodeOfLoop(Slow_Ptr, Fast_Ptr) << endl;
+                    removeLoop(Slow_Ptr);
+                    cout << "Linked List after removing loop : ";
+                    printList();
+                    cout << endl;
                     return ;
                 }
         }
@@ -120,7 +162,7 @@ int main(void)
     insertAtEnd(7);
     insertAtEnd(9);
     insertAtEnd(11);
-    Head -> Next -> Next -> Next -> Next = Head -> Next; //Test case to check if the loop exists in the linked list.
+    Head -> Next -> Next -> Next -> Next -> Next = Head -> Next; //Test case to check if the loop exists in the linked list.
     //Linked list is 3 -> 5 -> 7 -> 9 -> 11. (5, 7, 9 are the loop of the linked list)
     //                    |    <-   |
     detectLoop(Head);
