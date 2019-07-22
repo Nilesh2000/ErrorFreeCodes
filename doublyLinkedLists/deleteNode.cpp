@@ -1,4 +1,4 @@
-//A program to insert a node at the beginning of a list.
+//A program to delete a node, given it's address.
 # include <iostream>
 
 using namespace std;
@@ -32,6 +32,23 @@ void insertAtEnd(int x)
     newNode -> Prev = Temp; //Set the previous pointer of the newly allocated node to the second last node.
 }
 
+void deleteNode(Node *delNode)
+{
+    if(Head == delNode) //Check if the node to be deleted is the head node.
+    {
+        Head = delNode -> Next; //Then, set the address of the head node to delNode -> Next (Which happens to be the second node)
+    }
+    if(delNode -> Next != NULL) //Alter Next only if the node to be deleted is not the last node.
+    {
+        delNode -> Next -> Prev = delNode -> Prev;
+    }
+    if(delNode -> Prev != NULL) //Alter Prev only if the node to be deleted is not the first node.
+    {
+        delNode -> Prev -> Next = delNode -> Next;
+    }
+    delete delNode; //Finally delete the memory space occupied by delNode.
+}
+
 void printList()
 {
   //Traversal in forward dierection.
@@ -59,6 +76,10 @@ int main(void)
     insertAtEnd(3);
     insertAtEnd(4);
     insertAtEnd(5);
+    printList();
+    //deleteNode(Head);
+    deleteNode(Head -> Next -> Next);
+    cout << "\n\nAfter deletion :-";
     printList();
     return 0;
 }
