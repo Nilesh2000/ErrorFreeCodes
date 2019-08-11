@@ -11,25 +11,25 @@ struct BstNode
 
 BstNode* insertNewNode(BstNode* Root, int Data)
 {
-    BstNode *newNode = new BstNode();
+    BstNode *newNode = new BstNode(); //Memory allocation for new node.
     newNode -> Data = Data;
 
-    if(Root == NULL)
+    if(Root == NULL) //If the tree has no elements initially
     {
-        Root = newNode;
-        newNode -> Left = newNode -> Right = NULL;
+        Root = newNode; //Store the address of the newNode in Root
+        newNode -> Left = newNode -> Right = NULL; //Set the left and right pointer of newNode to NULL.
         return Root;
     }
 
-    if(Root -> Data >= Data)
+    if(Root -> Data >= Data) //If data stored in the root node is greater than the data to be inserted, make sure to insert the new node in the left subtree.
     {
         Root -> Left = insertNewNode(Root -> Left, Data);
     }
-    else
+    else //Else, just insert it into the right subtree.
     {
         Root -> Right = insertNewNode(Root -> Right, Data);
     }
-    return Root;
+    return Root; //Return address of the root node every time a new node is inserted in the tree..
 }
 
 bool searchForElement(BstNode* Root, int Data)
@@ -40,10 +40,10 @@ bool searchForElement(BstNode* Root, int Data)
     else if(Root -> Data == Data)
       return true;
 
-    else if(Root -> Data >= Data)
+    else if(Root -> Data >= Data) //If data stored in root node is greater than the data to be searched, then continue to search in the left subtree.
       return searchForElement(Root -> Left, Data);
 
-    else
+    else //Else, search in the right subtree.
       return searchForElement(Root -> Right, Data);
 }
 
