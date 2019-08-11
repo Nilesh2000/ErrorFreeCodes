@@ -14,17 +14,19 @@ struct BstNode
     BstNode *Left, *Right;
 };
 
-BstNode* insertNewNode(BstNode* Root, int Data)
+//Function to allocate memory for a new node.
+BstNode* newNode(int Data)
 {
     BstNode *newNode = new BstNode(); //Memory allocation for new node.
     newNode -> Data = Data;
+    newNode -> Left = newNode -> Right = NULL;
+    return newNode;
+}
 
-    if(Root == NULL) //If the tree has no elements initially
-    {
-        Root = newNode; //Store the address of the newNode in Root
-        newNode -> Left = newNode -> Right = NULL; //Set the left and right pointer of newNode to NULL.
-        return Root;
-    }
+BstNode* insertNewNode(BstNode* Root, int Data)
+{
+    if(Root == NULL) //If the tree or subtree has no elements
+      return newNode(Data);
 
     if(Root -> Data >= Data) //If data stored in the root node is greater than the data to be inserted, make sure to insert the new node in the left subtree.
     {
