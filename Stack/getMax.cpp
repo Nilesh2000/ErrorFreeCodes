@@ -1,94 +1,62 @@
-//A program to retrieve the largest element present in a stack.
+//A program to calculate the largest element in a stack.
 # include <iostream>
 # include <stack>
 
 using namespace std;
 
-stack <int> S;
-int maxElement;
-
-/*
-Push(x) : Inserts x at the top of stack.
-
-If stack is empty, insert x into the stack and make maxEle equal to x.
-If stack is not empty, compare x with maxEle. Two cases arise:
-If x is less than or equal to maxEle, simply insert x.
-If x is greater than maxEle, insert (2*x – maxEle) into the stack and make maxEle equal to x. For example, let previous maxEle was 3. Now we want to insert 4.
-We update maxEle as 4 and insert 2*4 – 3 = 5 into the stack.
-
-Pop() : Removes an element from top of stack.
-
-Remove element from top. Let the removed element be y. Two cases arise:
-If y is less than or equal to maxEle, the maximum element in the stack is still maxEle.
-If y is greater than maxEle, the maximum element now becomes (2*maxEle – y), so update (maxEle = 2*maxEle – y). This is where we retrieve previous maximum
-from current maximum and its value in stack. For example, let the element to be removed be 5 and maxEle be 4. We remove 5 and update maxEle as 2*4 – 5 = 3.
-*/
-
-void pushData(int Data)
+class Stack
 {
-    if(S.empty()) //If the stack is initially empty
+    stack <int> mainStack, trackStack;
+  public:
+    /*
+    Create an auxiliary stack, say ‘trackStack’ to keep the track of maximum element
+    Push the first element to both mainStack and the trackStack.
+    Now from the second element, push the element to the main stack. Compare the element with the top element of the track stack, if the current element is
+    greater than top of trackStack then push the current element to trackStack otherwise push the top element of trackStack again into it.
+    If we pop an element from the main stack, then pop an element from the trackStack as well.
+    Now to compute the maximum of the main stack at any point, we can simply print the top element of Track stack.
+    */
+    void pushData(int x)
     {
-        //Just blindly insert the element into the stack and set the maxElement to Data.
-        S.push(Data);
-        maxElement = Data;
-        cout << Data << " is inserted into the stack.\n";
-        return ;
+        mainStack.push(x);
+        if(mainStack.size() == 1)
+        {
+            trackStack.push(x);
+            return ;
+        }
+
+        if(x > trackStack.top())
+        {
+            trackStack.push(x);
+        }
+        else
+        {
+            trackStack.push(trackStack.top());
+        }
     }
 
-    if(Data > maxElement)  //If element to be inserted is greater than maxElement
+    void popData()
     {
-        S.push(2 * Data - maxElement);
-        maxElement = Data;
+        mainStack.pop();
+        trackStack.pop();
     }
-    else //Else just push into the stack
-      S.push(Data);
 
-    cout <<  Data << " is inserted into the stack.\n";
-}
+    int getMax()
+    {
+        return trackStack.top();
+    }
+};
 
-void popData()
+int main(void)
 {
-    if(S.empty())
-    {
-        cout << "\nStack Underflow. No elements to pop.\n";
-        return ;
-    }
-
-    int Top = S.top();
-    S.pop();
-
-    if(Top > maxElement)
-    {
-        cout << maxElement << " has been popped from the stack.\n";
-        maxElement = 2 * maxElement - Top;
-    }
-
-    else
-    {
-        cout << Top << " has been popped from the stack.";
-    }
-}
-
-void getMax()
-{
-    if(S.empty())
-    {
-        cout << "\nStack Underflow. No elements to pop.\n";
-        return ;
-    }
-
-    cout << maxElement << " is the largest element in the stack.\n";
-}
-
-int main(void) //Dirver function
-{
-    pushData(2);
-    pushData(3);
-    pushData(1);
-    pushData(5);
-    getMax();
-    popData();
-    getMax();
+    Stack S;
+    S.pushData(10);
+    S.pushData(15);
+    S.pushData(20);
+    cout << S.getMax() << " ";
+    S.popData();
+    cout << S.getMax() << " ";
+    S.pushData(30);
+    cout << S.getMax() << " ";
     return 0;
 }
-//End of program
