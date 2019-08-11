@@ -1,4 +1,5 @@
 //A program to create a BST of integers and search an element in it.
+//A binary search tree should not have duplicate nodes.
 # include <iostream>
 
 using namespace std;
@@ -58,7 +59,7 @@ int main(void)
     Root = insertNewNode(Root, 25);
     Root = insertNewNode(Root, 8);
     Root = insertNewNode(Root, 12);
-    Root = insertNewNode(Root, 15);
+    Root = insertNewNode(Root, 16);
     if(searchForElement(Root, 8) == true)
       cout << "Found";
     else
