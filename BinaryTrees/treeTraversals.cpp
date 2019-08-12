@@ -1,5 +1,6 @@
 //A program to implement all types of traversals on a tree namely the inorder, preorder and postorder traversal techniques.
 # include <iostream>
+# include <queue>
 
 using namespace std;
 
@@ -36,8 +37,8 @@ void preOrderTraversal(Node *Root)
       return ;
 
     cout << Root -> Data << " ";
-    inOrderTraversal(Root -> Left);
-    inOrderTraversal(Root -> Right);
+    preOrderTraversal(Root -> Left);
+    preOrderTraversal(Root -> Right);
 }
 
 //In postorder traversal, the data in the root node is displayed after the data in the left and right node.
@@ -46,9 +47,27 @@ void postOrderTraversal(Node *Root)
     if(Root == NULL)
       return ;
 
-    inOrderTraversal(Root -> Left);
-    inOrderTraversal(Root -> Right);
+    postOrderTraversal(Root -> Left);
+    postOrderTraversal(Root -> Right);
     cout << Root -> Data << " ";
+}
+
+void levelOrderTraversal(Node *Root)
+{
+    queue <Node*> Q;
+    Q.push(Root);
+    while(Q.empty() == false)
+    {
+        Node *n = Q.front();
+        cout << n -> Data << " ";
+        Q.pop();
+
+        if(n -> Left != NULL)
+          Q.push(n -> Left);
+
+        if(n -> Right != NULL)
+          Q.push(n -> Right);
+    }
 }
 
 int main(void)
@@ -66,5 +85,7 @@ int main(void)
     preOrderTraversal(Root);
     cout << "\nPostorder traversal : ";
     postOrderTraversal(Root);
+    cout << "\nLevel Order Traversal : ";
+    levelOrderTraversal(Root);
     return 0;
 }
