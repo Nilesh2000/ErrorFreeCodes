@@ -4,22 +4,22 @@
 
 using namespace std;
 
-struct BstNode
+struct Node
 {
     int Data;
-    BstNode *Left, *Right;
+    Node *Left, *Right;
 };
 
 //Function to allocate memory for a new node.
-BstNode* newNode(int Data)
+Node* newNode(int Data)
 {
-    BstNode *newNode = new BstNode(); //Memory allocation for new node.
+    Node *newNode = new Node(); //Memory allocation for new node.
     newNode -> Data = Data;
     newNode -> Left = newNode -> Right = NULL;
     return newNode;
 }
 
-bool printAllAncestors(BstNode *Root, int Num)
+bool printAllAncestors(Node *Root, int Num)
 {
     if(Root == NULL)
       return false;
@@ -39,10 +39,9 @@ bool printAllAncestors(BstNode *Root, int Num)
 }
 
 //Driver Function
-//In this program, we decide the structure of the BST, thus, the unconventional insertion technique.
 int main(void)
 {
-    BstNode *Root = newNode(1);
+    Node *Root = newNode(1);
     Root -> Left = newNode(2);
     Root -> Right = newNode(3);
     Root -> Left -> Left = newNode(4);
