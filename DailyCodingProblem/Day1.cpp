@@ -1,28 +1,38 @@
-//Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+//Given a list of numbers and a number k, return whether any two numbers from the list add up to k. Also, return their respective indices.
 # include <iostream>
-# include <unordered_set>
+# include <vector>
+# include <unordered_map>
 
 using namespace std;
 
-void printPair(int A[], int Sum, int n)
+vector <int> printPair(vector <int> &Num, int Sum)
 {
-    unordered_set <int> S;
-    for(int i = 0 ; i < n ; i++)
+    unordered_map <int, int> M; //An unordered map to map the the key - value pair where key is the element in the vector and value is it's index.
+    vector <int> Res; //Vector to store indices.
+
+    for(int i = 0 ; i < Num.size() ; i++) //Traverse the whole vector
     {
-        int Temp = Sum - A[i];
-        if(S.find(Temp) != S.end())
+        int numberToFind = Sum - Num[i];
+        if(M.find(numberToFind) != M.end())
         {
-            cout << "The pairs are " << A[i] << " and " << Temp << "." << endl;
+            Res.push_back(M[numberToFind] + 1);
+            Res.push_back(i + 1);
+            //Incrementing by 1 since vector indices start at 0.
+            cout << Num[i] << " " << numberToFind << " ";
         }
-        S.insert(A[i]);
+        M[Num[i]] = i; //If element is not found, insert it into the map.
     }
+    return Res;
 }
 
 int main(void)
 {
-    int Arr[] = {9, 10, 8, 7, 5, 6};
+    vector <int> V = {9, 10, 8, 7, 5, 6};
     int Sum = 17;
-    int Size = sizeof(Arr) / sizeof(Arr[0]);
-    printPair(Arr, Sum, Size);
+    vector <int> R = printPair(V, Sum);
+    cout << "\n";
+    for(auto it = R.begin() ; it != R.end() ; it++)
+      cout << *it << " ";
     return 0;
 }
+//End of program
