@@ -1,4 +1,6 @@
 //Given an array of n integers, print all the elements of the list which occur more than once in the list.
+//Time Complexity : O(n)
+//Space Complexity : O(n)
 # include <iostream>
 # include <unordered_set>
 
