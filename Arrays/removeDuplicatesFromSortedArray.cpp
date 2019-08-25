@@ -12,11 +12,13 @@ int removeDuplicates(int arr[], int n)
     {
         if(arr[i] != arr[i + 1]) //If the two adjacent elements are dissimilar
         {
-            arr[j++] = arr[i]; //Store value of Arr[j++] in Arr[i]
+            arr[j] = arr[i]; //Store value of Arr[i] in Arr[j]
+            j++; //increment j so that the next value be stored in the next index
         }
     }
 
-    arr[j++] = arr[n - 1]; //Store the last element in Arr[j++]
+    arr[j] = arr[n - 1]; //Store the last element in Arr[j]
+    j++; //Increment j which is now the new size of the array. The number of elements in the array is j - 1.
     return j; //Return j as it is the new updated size.
 }
 
