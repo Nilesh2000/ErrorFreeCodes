@@ -59,6 +59,6 @@ int main(void) //Driver function
     Root = insertNewNode(Root, 7);
     Root = insertNewNode(Root, 5);
     Root = insertNewNode(Root, 6);
-    cout << "\nThe heigh/maximum depth of the BST is : " << findHeight(Root);
+    cout << "\nThe height/maximum depth of the BST is : " << findHeight(Root);
     return 0;
 }
