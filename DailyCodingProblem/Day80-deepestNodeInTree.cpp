@@ -1,8 +1,4 @@
-//A program to calculate the height or maximum depth of a binary search tree and find the deepest node in the tree.
-/*
-Outstanding explaination
-https://www.youtube.com/watch?time_continue=383&v=TQI_m32_AeU
-*/
+//Given the root of a binary tree, return a deepest node. For example, in the following tree, return d.
 # include <iostream>
 
 using namespace std;
@@ -33,6 +29,9 @@ int findHeight(Node* Root)
     return max(leftDepth, rightDepth) + 1;
 }
 
+/*
+The logic here is to find the height of the tree and then recursively go till the node at the deepest level.
+*/
 void findDeepestNode(Node* Root, int Levels)
 {
     if(!Root)
