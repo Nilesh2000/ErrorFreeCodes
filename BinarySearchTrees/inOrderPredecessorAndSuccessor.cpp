@@ -53,8 +53,7 @@ BstNode *findNode(BstNode *Root, int Data)
       return findNode(Root -> Left, Data);
     else if(Root -> Data < Data)
       return findNode(Root -> Right, Data);
-    else
-      return Root;
+    return Root;
 }
 
 //Function to find the node with smallest value in a tree/subtree.
@@ -62,9 +61,22 @@ BstNode *findMin(BstNode *Root)
 {
     if(Root == NULL)
       return NULL;
+
     while(Root -> Left != NULL)
     {
         Root = Root -> Left;
+    }
+    return Root;
+}
+
+BstNode *findMax(BstNode *Root)
+{
+    if(Root == NULL)
+      return NULL;
+
+    while(Root -> Right != NULL)
+    {
+        Root = Root -> Right;
     }
     return Root;
 }
@@ -73,6 +85,7 @@ BstNode *findMin(BstNode *Root)
 BstNode *getSuccessor(BstNode *Root, int Data)
 {
     BstNode *Cur = findNode(Root, Data); //Find the position of the node in the BST whose inorder successor is to be found.
+
     if(Cur == NULL) //If not found, return from the function.
       return NULL;
 
@@ -80,7 +93,9 @@ BstNode *getSuccessor(BstNode *Root, int Data)
     {
         return findMin(Cur -> Right);
     }
-    else //If the right subtree happens to be empty, then the successor will be one of the ancestors of Cur.
+
+    //If the right subtree is empty, then find the node with the greatest height which is greater than Cur -> Data.
+    else
     {
         //Declare two pointers for traversal
         BstNode *Successor = NULL;
@@ -92,8 +107,9 @@ BstNode *getSuccessor(BstNode *Root, int Data)
         {
             if(Cur -> Data < Ancestor -> Data)
             {
-                Successor = Ancestor; //So far this is the deepest node for which current node is in left
-                Ancestor = Ancestor -> Left;
+                Successor = Ancestor;
+                Ancestor = Ancestor -> Left; //We go left now as we know that Cur -> Data is defintely lesser than Ancestor -> Data and will lie in the left
+                                             //subtree of Ancestor.
             }
             else
             {
@@ -101,6 +117,42 @@ BstNode *getSuccessor(BstNode *Root, int Data)
             }
         }
         return Successor;
+    }
+}
+
+BstNode *getPredecessor(BstNode *Root, int Data)
+{
+    BstNode *Cur = findNode(Root, Data); //Find if the node exists in the tree
+
+    //If the node does not exist in the tree, return NULL.
+    if(Cur == NULL)
+      return NULL;
+
+    //If the left subtree is not empty, then return the node with maximum value in the left subtree.
+    if(Cur -> Left != NULL)
+    {
+        return findMax(Root -> Left);
+    }
+
+    //If the left subtree is empty, then find the node with the greatest height which is smaller than Cur -> Data.
+    else
+    {
+        BstNode *Ancestor = Root;
+        BstNode *Predecessor = NULL;
+
+        while(Ancestor != Cur)
+        {
+            if(Cur -> Data > Ancestor -> Data)
+            {
+                Predecessor = Ancestor;
+                Ancestor = Ancestor -> Right;
+            }
+            else
+            {
+                Ancestor = Ancestor -> Left;
+            }
+        }
+        return Predecessor;
     }
 }
 
@@ -114,12 +166,20 @@ int main(void)
     Root = insertNewNode(Root, 1);
     Root = insertNewNode(Root, 4);
     Root = insertNewNode(Root, 11);
-    BstNode *Successor = getSuccessor(Root, 4);
     inOrderTraversal(Root);
+
+    BstNode *Predecessor = getPredecessor(Root, 5);
+    if(Predecessor == NULL)
+      cout << "\nPredecessor not found.";
+    else
+      cout << "\nThe inorder Predecessor is : " << Predecessor -> Data;
+
+    BstNode *Successor = getSuccessor(Root, 5);
     if(Successor == NULL)
       cout << "\nSuccessor not found.";
     else
       cout << "\nThe inorder successor is : " << Successor -> Data;
+
     return 0;
 }
 //End of program

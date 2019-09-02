@@ -93,7 +93,13 @@ BstNode *deleteNode(BstNode *Root, int Key)
             Root = Root -> Left;
             delete Temp;
         }
-        //Case 3 : The node to be deleted has two children
+        /*
+        Case 3 : The node to be deleted has two children
+        Find the inorder successor/predecessor of the node to be deleted.
+        Copy the data in that node to the the node which was to be deleted.
+        Delete the inorder successor/predecessor.
+        In this case, we use inorder Successor.
+        */
         else
         {
             BstNode *Temp = findMin(Root -> Right);
