@@ -17,16 +17,18 @@ using namespace std;
 int Partition(int Arr[], int Start, int End)
 {
     int Pivot = Arr[End]; //Set the pivot element to the last element of the sub-array.
-    int partitionIndex = Start; //Set the partion index initially to start.
+    int partitionIndex = Start - 1; //Set the partion index initially to start.
+
     for(int i = Start ; i < End ; i++) //Run a loop from the start of the sub-array to the end of the sub-array.
     {
         if(Arr[i] <= Pivot) //If one of the elements of the sub array is lesser than the pivot
         {
-            swap(Arr[i], Arr[partitionIndex]); //Swap it with the element at partition index to make sure it reaches the beginning of the array.
             partitionIndex++; //Move the partition index forward by 1.
+            swap(Arr[i], Arr[partitionIndex]); //Swap it with the element at partition index to make sure it reaches the beginning of the array.
         }
     }
-    swap(Arr[partitionIndex], Arr[End]); //Swap the element at partition index with the element at Arr[End] which happens to be the Pivot element.
+
+    swap(Arr[partitionIndex + 1], Arr[End]); //Swap the element at partition index with the element at Arr[End] which happens to be the Pivot element.
     return partitionIndex;
 }
 
@@ -44,9 +46,9 @@ void quickSort(int Arr[], int Start, int End)
 //Driver Program
 int main(void)
 {
-    int Arr[] = {7, 6, 4, 2, 1, 3, 5};
+    int Arr[] = {7, 4, 6, 2, 1, 3, 5};
     int n = sizeof(Arr) / sizeof(int);
-    quickSort(Arr, 0, n);
+    quickSort(Arr, 0, n - 1);
     cout << "\nSorted Array : ";
     for(int i = 0 ; i < n ; i++)
     {
