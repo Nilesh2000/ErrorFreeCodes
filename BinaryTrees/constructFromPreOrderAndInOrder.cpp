@@ -50,7 +50,7 @@ Recursively doing this on subarrays, we can build a tree out of it.
 //Note To Self : The preEnd parameter is not necessary here, but I am including it for uniformity.
 Node *constructTree(int preStart, int preEnd, int inStart, int inEnd, vector <int> preOrder, vector <int> inOrder, map <int, int> inMap)
 {
-    if(preStart > preOrder.size() - 1 || inStart > inEnd)
+    if(preStart > preEnd || inStart > inEnd)
     {
         return NULL;
     }
@@ -68,8 +68,8 @@ Node *constructTree(int preStart, int preEnd, int inStart, int inEnd, vector <in
 
 int main(void)
 {
-    vector <int> inOrder = {2, 1, 3};
-    vector <int> preOrder = {1, 2, 3};
+    vector <int> inOrder = {4, 2, 5, 1, 3, 6};
+    vector <int> preOrder = {1, 2, 4, 5, 3, 6};
 
     if(inOrder.size() != preOrder.size())
     {
@@ -83,7 +83,7 @@ int main(void)
     for(int i = 0 ; i < inOrder.size() ; i++)
       inMap[inOrder[i]] = i;
 
-    Node *Root = constructTree(0, preOrder.size(), 0, inOrder.size(), preOrder, inOrder, inMap);
+    Node *Root = constructTree(0, preOrder.size() - 1, 0, inOrder.size() - 1, preOrder, inOrder, inMap);
     cout << "\nInorder and preorder traversals after constructing the tree : \n";
     inOrderTraversal(Root);
     cout << "\n";
