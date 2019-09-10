@@ -47,6 +47,7 @@ Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left sid
 Recursively doing this on subarrays, we can build a tree out of it.
 */
 //Function to construct tree from the preOrder and inOrder traversals
+//Note To Self : The preEnd parameter is not necessary here, but I am including it for uniformity.
 Node *constructTree(int preStart, int preEnd, int inStart, int inEnd, vector <int> preOrder, vector <int> inOrder, map <int, int> inMap)
 {
     if(preStart > preOrder.size() - 1 || inStart > inEnd)
@@ -59,7 +60,7 @@ Node *constructTree(int preStart, int preEnd, int inStart, int inEnd, vector <in
     int numsLeft = inRoot - inStart; //The number of nodes on the left side of the root on the inorder traversal are the number of nodes in the left subtree.
 
     //The left subtree of the root will be all the nodes which are present before the root node in the inorder traversal.
-    Root -> Left = constructTree(preStart + 1, preStart + numsLeft, inStart, inRoot - 1, preOrder, inOrder, inMap);
+    Root -> Left = constructTree(preStart + 1, preEnd, inStart, inRoot - 1, preOrder, inOrder, inMap);
     //The right subtree of the root will be all the nodes which are present after the root node in the inorder traversal.
     Root -> Right = constructTree(preStart + numsLeft + 1, preEnd, inRoot + 1, inEnd, preOrder, inOrder, inMap);
     return Root;
