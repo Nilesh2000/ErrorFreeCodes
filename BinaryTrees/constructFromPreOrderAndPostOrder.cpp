@@ -2,6 +2,7 @@
 It is not possible to create a tree, given the preorder and postorder traversals of a binary tree.
 But, if it is given that the tree to be constructed is a full binary tree, then the preorder and postorder traversals are sufficient/
 A full binary tree is a tree where every internal node has 2 childeren only.
+This program will work only if both traversals have unique elements.
 */
 # include <iostream>
 # include <vector>
@@ -68,8 +69,8 @@ Node *constructTree(vector <int> preOrder, vector <int> postOrder)
 
 int main(void)
 {
-    vector <int> preOrder = {1, 2, 3};
-    vector <int> postOrder = {2, 3, 1};
+    vector <int> preOrder = {1, 2, 4, 5, 3, 6, 8, 9, 7};
+    vector <int> postOrder = {4, 5, 2, 8, 9, 6, 7, 3, 1};
 
     Node *Root = constructTree(preOrder, postOrder);
     cout << "\nPreorder and postorder traversals after constructing the tree : \n";
