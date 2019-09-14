@@ -6,34 +6,20 @@ rearrangement that can form a palindrome.
 */
 # include <iostream>
 # include <string>
-# define noOfChars 256
+# include <bitset>
+# define SIZE 26
 
 using namespace std;
 
 bool checkIfPermutationIsAPalindrome(string s)
 {
-    int Count[noOfChars] = {0};
+    bitset <SIZE> bSet(0);
     int Len = s.length();
-
     for(int i = 0 ; i < Len ; i++)
     {
-        Count[s[i]]++; //Storing the coutn of occurence of each charcter of the string in a Count Array.
+        bSet.flip(s[i] - 'a');
     }
-
-    int oddOccurence = 0; //Keep track of the number of characters which occur an odd number of times in the string
-
-    for(int i = 0 ; i < noOfChars ; i++) //Traverse the whole Count Array.
-    {
-        if(Count[i] % 2) //If Count[i] is Odd
-        {
-            oddOccurence++;
-        }
-        if(oddOccurence > 1)
-        {
-            return false; //If odd count exceeds 1, then the string cannot have a permutation which is a palindrome.
-        }
-    }
-    return true; //Return true if the odd count is 0 or 1.
+    return (bSet.count() <= 1);
 }
 
 int main(void)
