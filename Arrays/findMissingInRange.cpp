@@ -1,7 +1,14 @@
 /*
 Given an array arr[0..n-1] of distinct elements and a range [low, high], find all numbers that are in range, but not in array. The missing elements should be
 printed in sorted order.
+Time complexity of first approach is O(nLogn + k) where k is number of missing elements (Note that k may be more than nlogn if array is small and range is big)
+Time complexity of second solution is O(n + (high-low+1)).
+If the given array has almost elements of range i.e., n is close to value of (high-low+1), then second approach is definitely better as there is no Log n
+factor. But if n is much smaller than range, then first approach is better as it doesn’t require extra space for hashing. We can also modify first approach to
+print adjacent missing elements as range to save time. For example if 50, 51, 52, 53, 54, 59 are missing, we can print them as 50-54, 59 in first method.
+And if printing this way is allowed, the first approach takes only O(n Log n) time.
 */
+
 # include <iostream>
 # include <unordered_set>
 
