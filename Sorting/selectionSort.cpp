@@ -4,7 +4,7 @@ using namespace std;
 
 int main(void)
 {
-    int Arr[] = {6, 21, 43, 22, -2, 89, 17}, n = sizeof(Arr) / sizeof(Arr[0]);
+    int Arr[] = {6, 21, 43, 22, -2, 89, 1}, n = sizeof(Arr) / sizeof(Arr[0]);
     int iMin, Temp;
     //We have to go only till n-1 because the array will already be sorted by then, since all the smaller elements must
     //have occupied the first n-2 places. Thus, there is no need to to perform a sort for the last remaining element.
@@ -17,10 +17,10 @@ int main(void)
                       {
                           iMin = j;
                       }
+                }
                    Temp = Arr[i];
                    Arr[i] = Arr[iMin];
                    Arr[iMin] = Temp;
-                }
         }
       for(int i = 0 ; i < n ; i++)
         {
