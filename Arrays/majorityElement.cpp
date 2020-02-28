@@ -1,3 +1,5 @@
+// Moore's Voting Algorithm
+// This algorithm assumes that a majority element is present in the array.
 # include <iostream>
 
 using namespace std;

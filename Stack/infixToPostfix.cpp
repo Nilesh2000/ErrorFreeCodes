@@ -1,27 +1,27 @@
 //A program to convert an infix expression to a postfix expression
-# include <iostream>
-# include <stack>
-# include <string>
+#include <iostream>
+#include <stack>
+#include <string>
 
 using namespace std;
 
 //Function which checks and returns if the passed character is an operand.
 bool isOperand(char c)
 {
-    if(c >= '0' && c <= '9')
-      return true;
-    else if(c >= 'a' && c <='z')
-      return true;
-    else if(c >= 'A' && c <= 'Z')
-      return true;
+    if (c >= '0' && c <= '9')
+        return true;
+    else if (c >= 'a' && c <= 'z')
+        return true;
+    else if (c >= 'A' && c <= 'Z')
+        return true;
     return false;
 }
 
 //Function which checks and returns if the passed character is an operator.
 bool isOperator(char c)
 {
-    if(c == '+' || c == '-' || c == '*' || c =='/')
-      return true;
+    if (c == '+' || c == '-' || c == '*' || c == '/')
+        return true;
     return false;
 }
 
@@ -30,19 +30,21 @@ int getOperatorWeight(char Op)
 {
     int Weight = -1;
 
-    switch(Op)
+    switch (Op)
     {
-        case '+' :
-        case '-' : Weight = 1;
-                    break;
+    case '+':
+    case '-':
+        Weight = 1;
+        break;
 
-        case '*' :
-        case '/' : Weight = 2;
-                    break;
+    case '*':
+    case '/':
+        Weight = 2;
+        break;
 
-        case '^' : Weight = 3;
-                    break;
-
+    case '^':
+        Weight = 3;
+        break;
     }
     return Weight;
 }
@@ -57,50 +59,49 @@ bool hasHigherPrecedence(char op1, char op2)
 
 string infixToPostfix(string Exp)
 {
-    stack <char> S; //Stack to keep track of the operators and operands.
+    stack<char> S;       //Stack to keep track of the operators and operands.
     string Postfix = ""; //The postfix expression is initially an empty string.
-    for(int i = 0 ; i < Exp.length() ; i++) //Traverse every character of the input expression.
+    int expLength = Exp.length();
+    for (int i = 0; i < expLength; i++) //Traverse every character of the input expression.
     {
-        if(Exp[i] == ' ' && Exp[i] == ',') //If the character is a deleimiter, ignore it and continue to parse the expression.
+        if (Exp[i] == ' ' && Exp[i] == ',') //If the character is a delimiter, ignore it and continue to parse the expression.
         {
             continue;
         }
 
-        else if(Exp[i] == '(') //If the scanned character is an open parantheses, blindly push it into the stack because it has highest precedence.
-                              //A left parenthesis on the stack will not be removed unless an incoming right parenthesis is found.
+        else if (Exp[i] == '(') //If the scanned character is an open parantheses, blindly push it into the stack because it has highest precedence. A left parenthesis on the stack will not be removed unless an incoming right parenthesis is found.
         {
             S.push(Exp[i]);
         }
 
-        else if(isOperand(Exp[i])) //If the scanned character is an operand, append it to the postfix expression because a postfix postfix expression
-                                   //usually consist of operands followed by the operators.
+        else if (isOperand(Exp[i])) //If the scanned character is an operand, append it to the postfix expression because a postfix postfix expression usually consist of operands followed by the operators.
         {
             Postfix += Exp[i];
         }
 
-        else if(isOperator(Exp[i])) //If the scanned character is an operator
+        else if (isOperator(Exp[i])) //If the scanned character is an operator
         {
             //If the scanned character has lower precedence than top of stack and the top of stack is not an opening parantheses, procced to the while loop.
             //Continue popping until the stack is not empty, the top element is not ( and S.top() has higher precedence than the scanned operator
-            while(!S.empty() && S.top() != '(' && hasHigherPrecedence(S.top(), Exp[i]))
+            while (!S.empty() && S.top() != '(' && hasHigherPrecedence(S.top(), Exp[i]))
             {
                 Postfix += S.top(); //Append the topmost element to the resulting postfix expression
-                S.pop(); //Pop the topmost element
+                S.pop();            //Pop the topmost element
             }
             S.push(Exp[i]); //Push the scanned operator into the stack.
         }
 
-        else if(Exp[i] == ')') //If the scanned character is an incoming closed parantheses, pop till the next left parantheses.
+        else if (Exp[i] == ')') //If the scanned character is an incoming closed parantheses, pop till the next left parantheses.
         {
-            while(!S.empty() && S.top() != '(')
+            while (!S.empty() && S.top() != '(')
             {
                 Postfix += S.top(); //Keep appending to the postfix expression
-                S.pop(); //Pop from the stack
+                S.pop();            //Pop from the stack
             }
             S.pop(); //Atlast pop the opening parantheses, but do not append it to the postfix expression.
         }
     }
-    while(!S.empty()) //After the complete expression has benn scanned, append the remaining stack to the postfix expression.
+    while (!S.empty()) //After the complete expression has been scanned, append the remaining stack to the postfix expression.
     {
         Postfix += S.top();
         S.pop();

@@ -7,17 +7,17 @@ Time Complexity : O(log n)
 Use a divide and conquer algorithm.
 */
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 int findPeakIndex(int Arr[], int n, int Low, int High)
 {
-    int Mid = (Low + High) / 2;
-    if(Arr[Mid] >= Arr[Mid - 1] && Arr[Mid] <= Arr[Mid + 1])
-        return Mid;
-    else if(Arr[Mid] < Arr[Mid - 1])
-        findPeakIndex(Arr, n, 0, Mid - 1);
-    else 
-        findPeakIndex(Arr, n, Mid + 1, High);
+  int Mid = (Low + High) / 2;
+  if (Arr[Mid] >= Arr[Mid - 1] && Arr[Mid] <= Arr[Mid + 1])
+    return Mid;
+  else if (Arr[Mid] < Arr[Mid - 1])
+    findPeakIndex(Arr, n, 0, Mid - 1);
+  else
+    findPeakIndex(Arr, n, Mid + 1, High);
 }
 
 int main(void)

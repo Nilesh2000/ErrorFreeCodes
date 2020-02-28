@@ -1,18 +1,18 @@
 //A program to check if a string contains balanced parantheses.
-# include <iostream>
-# include <stack>
+#include <iostream>
+#include <stack>
 
 using namespace std;
 
 bool ArePair(char Opening, char Closing)
 {
-    if(Opening == '(' && Closing == ')')
-      return true;
-    if(Opening == '{' && Closing == '}')
-      return true;
-    if(Opening == '[' && Closing == ']')
-      return true;
-    return false;
+  if (Opening == '(' && Closing == ')')
+    return true;
+  if (Opening == '{' && Closing == '}')
+    return true;
+  if (Opening == '[' && Closing == ']')
+    return true;
+  return false;
 }
 
 //The idea here is to use a stack so that we can push into the stack if one of the characters if (,{ or [. And if it is one of ),},], we then check if the
@@ -24,32 +24,32 @@ bool ArePair(char Opening, char Closing)
 //If it is not empty, we return false, else just return true back to main().
 bool checkBalancedParantheses(string str)
 {
-    stack <char> S;
-    int Len = str.length();
-    for(int i = 0 ; i < Len ; i++)
+  stack<char> S;
+  int Len = str.length();
+  for (int i = 0; i < Len; i++)
+  {
+    if (str[i] == '(' || str[i] == '{' || str[i] == '[')
     {
-        if(str[i] == '(' || str[i] == '{' || str[i] == '[')
-        {
-            S.push(str[i]);
-        }
-        else
-        {
-            if(S.empty() || !ArePair(S.top(), str[i]))
-              return false;
-            else
-              S.pop();
-        }
+      S.push(str[i]);
     }
-    return S.empty() ? true : false;
+    else
+    {
+      if (S.empty() || !ArePair(S.top(), str[i]))
+        return false;
+      else
+        S.pop();
+    }
+  }
+  return S.empty() ? true : false;
 }
 
 //Driver function
 int main(void)
 {
-    string s = "[{}()]";
-    if(checkBalancedParantheses(s))
-      cout << "\nThe string consists of balanced parantheses.";
-    else
-      cout << "\nThe string does not consist of balanced parantheses.";
-    return 0;
+  string s = "[{}()]";
+  if (checkBalancedParantheses(s))
+    cout << "\nThe string consists of balanced parantheses.";
+  else
+    cout << "\nThe string does not consist of balanced parantheses.";
+  return 0;
 }

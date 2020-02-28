@@ -7,7 +7,8 @@ using namespace std;
 
 int main(void)
 {
-    string str = "GeeksForGeeks";
+    string str;
+    cin >> str;
     set <char> S;
     for(int i = 0 ; i < str.length() ; i++)
     {
