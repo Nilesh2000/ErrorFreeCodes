@@ -1,3 +1,6 @@
+// Program to sort an array in wave form
+// We can do it in O(n logn) time by sorting the array in ascending order and then swapping the adjacent elements.
+// The below solution does it in O(n) time though.
 #include <iostream>
 using namespace std;
 void sortWaveForm(int Arr[], int n)

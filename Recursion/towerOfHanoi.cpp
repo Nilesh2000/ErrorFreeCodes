@@ -1,13 +1,13 @@
-# include <iostream>
+#include <iostream>
 
 using namespace std;
 
 void towerOfHanoi(int n, char fromRod, char toRod, char auxRod)
 {
-    if(n == 1)
+    if (n == 1)
     {
         cout << "\nMove disk 1 from rod " << fromRod << " to " << toRod;
-        return ;
+        return;
     }
     towerOfHanoi(n - 1, fromRod, auxRod, toRod);
     cout << "\nMove disk " << n << " from rod " << fromRod << " to rod " << toRod;
