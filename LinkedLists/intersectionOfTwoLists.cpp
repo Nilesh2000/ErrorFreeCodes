@@ -1,12 +1,12 @@
 //A program to insert elements at the end of a linked list.
-# include <iostream>
+#include <iostream>
 
 using namespace std;
 
 struct Node
 {
-  int Data;
-  Node *Next;
+    int Data;
+    Node *Next;
 };
 
 int getIntersectionNode(Node *, Node *, int);
@@ -14,21 +14,21 @@ int getIntersectionNode(Node *, Node *, int);
 void insertAtEnd(Node **A, int x) //A refers to the address of the head node.
 {
     Node *Temp = new Node(); //Allocate memory to create a new node.
-    Temp -> Data = x; //Initialize the Data of the node to the parameter passed.
-      if((*A) == NULL) //Check if the list is initially empty.
-        {
-            (*A) = Temp; //Set the address of the newly allocated node to Head.
-            return ;
-        }
+    Temp->Data = x;          //Initialize the Data of the node to the parameter passed.
+    if ((*A) == NULL)        //Check if the list is initially empty.
+    {
+        (*A) = Temp; //Set the address of the newly allocated node to Head.
+        return;
+    }
     //If the list is not empty,
 
     Node *lastNode = *A; //Set a temporary variable of type Node to Head.
 
-    while(lastNode -> Next != NULL) //Traverse the linked list till the end of the list.
-      {
-          lastNode = lastNode -> Next; //Keep moving to the next node.
-      }
-  lastNode -> Next = Temp; //Set the address of the last node to the newly allocated node in memory.
+    while (lastNode->Next != NULL) //Traverse the linked list till the end of the list.
+    {
+        lastNode = lastNode->Next; //Keep moving to the next node.
+    }
+    lastNode->Next = Temp; //Set the address of the last node to the newly allocated node in memory.
 }
 
 //Calculating Length of the linked list.
@@ -36,11 +36,11 @@ int countNodes(Node *A)
 {
     Node *Temp = A; //Set a temporary pointer as the head node
     int Count = 0;
-      while(Temp != NULL)
-        {
-            Count++;
-            Temp = Temp -> Next;
-        }
+    while (Temp != NULL)
+    {
+        Count++;
+        Temp = Temp->Next;
+    }
     return Count;
 }
 
@@ -62,20 +62,20 @@ int getIntersectionNode(Node *A1, Node *A2, int d) //A1 and A2 are addresses of 
 {
     Node *Cur1 = A1;
     Node *Cur2 = A2;
-      for(int i = 0 ; i < d ; i++)
+    for (int i = 0; i < d; i++)
+    {
+        Cur1 = Cur1->Next;
+    }
+    while (Cur1 != NULL && Cur2 != NULL)
+    {
+        if (Cur1 == Cur2)
         {
-            Cur1 = Cur1 -> Next;
+            return Cur1->Data;
         }
-      while(Cur1 != NULL && Cur2 != NULL)
-        {
-            if(Cur1 == Cur2)
-              {
-                  return Cur1 -> Data;
-              }
-          //No point in writing else here because it is redundant.
-          Cur1 = Cur1 -> Next;
-          Cur2 = Cur2 -> Next;
-        }
+        //No point in writing else here because it is redundant.
+        Cur1 = Cur1->Next;
+        Cur2 = Cur2->Next;
+    }
     return -1;
 }
 
@@ -83,10 +83,10 @@ int main(void)
 {
     Node *Head1 = NULL;
     Node *Head2 = NULL;
-/*
-    //T1 (c1 > c2)
-    //List 1 : 3 6 9 15 30
-    //List 2 : 10 15 25
+    /*
+    T1 (c1 > c2)
+    List 1 : 3 6 9 15 30
+    List 2 : 10 15 25
     insertAtEnd(&Head1, 3);
     insertAtEnd(&Head1, 6);
     insertAtEnd(&Head1, 9);
@@ -97,9 +97,9 @@ int main(void)
     Head1 -> Next -> Next -> Next = Head2 -> Next; //The address for the data 15 should be same in both the lists.
     insertAtEnd(&Head2, 25);
 
-    //T2 (c1 == c2)
-    //List 1 : 3 6 15
-    //List 2 : 10 15 25
+    T2 (c1 == c2)
+    List 1 : 3 6 15
+    List 2 : 10 15 25
     insertAtEnd(&Head1, 3);
     insertAtEnd(&Head1, 6);
     insertAtEnd(&Head1, 15);
@@ -116,7 +116,7 @@ int main(void)
     insertAtEnd(&Head2, 10);
     insertAtEnd(&Head2, 12);
     insertAtEnd(&Head2, 15);
-    Head1 -> Next = Head2 -> Next -> Next; //The address for the data 15 should be same in both the lists.
+    Head1->Next = Head2->Next->Next; //The address for the data 15 should be same in both the lists.
     insertAtEnd(&Head2, 35);
     insertAtEnd(&Head2, 45);
     insertAtEnd(&Head2, 55);
