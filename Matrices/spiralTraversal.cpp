@@ -77,3 +77,7 @@ int main(void)
   return 0;
 }
 //End of program
+/*
+To print a matrix in anti spiral form,
+all we have to do is traverse the matrix in a spiral form and then insert each element during the iteration into a stack.
+*/
