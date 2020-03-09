@@ -1,6 +1,6 @@
 //A program to calculate the inversion count of an array.
-# include <iostream>
-# include <set>
+#include <iostream>
+#include <set>
 
 using namespace std;
 /*
@@ -21,13 +21,13 @@ using namespace std;
 */
 int inversionCount(int Arr[], int n)
 {
-    set <int> S;
+    set<int> S;
     S.insert(Arr[0]);
     int Count = 0;
-    for(int i = 1 ; i < n ; i++)
+    for (int i = 1; i < n; i++)
     {
         S.insert(Arr[i]);
-        set <int> ::iterator it = S.upper_bound(Arr[i]);
+        set<int>::iterator it = S.upper_bound(Arr[i]);
         Count += distance(it, S.end());
     }
     return Count;
