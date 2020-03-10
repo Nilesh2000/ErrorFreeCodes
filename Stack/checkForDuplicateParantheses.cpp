@@ -2,7 +2,7 @@
 /*
 The logic used is as follows:-
 ((a+b)) - Has Duplicate parantheses
-(a+b+c) - Has not Duplicate paarantheses
+(a+b+c) - Does not Duplicate paarantheses
 
 We use a stack here.
 If we encounter anything other than ), we push it to top of the stack.

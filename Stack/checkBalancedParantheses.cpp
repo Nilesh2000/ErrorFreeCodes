@@ -15,8 +15,7 @@ bool ArePair(char Opening, char Closing)
   return false;
 }
 
-//The idea here is to use a stack so that we can push into the stack if one of the characters if (,{ or [. And if it is one of ),},], we then check if the
-//stack is empty or not.
+//The idea here is to use a stack so that we can push into the stack if one of the characters if (,{ or [. And if it is one of ),},], we then check if the stack is empty or not.
 //If the stack is empty, we return false to main().
 //If it is not empty, we then check if the topmost element of the stack forms a pair with one of the types of the closing brackets.
 //If they do form a pair, we pop out the topmost element of the stack and continue to iterate through the string.
