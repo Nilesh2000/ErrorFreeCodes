@@ -34,7 +34,6 @@ void printString(int n)
   cout << Str;
 }
 
-// Driver Program
 int main(void)
 {
   int n;
