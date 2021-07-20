@@ -6,6 +6,7 @@ int binarySearch(int Arr[], int Low, int High, int x)
   {
     return -1;
   }
+
   int Mid = (Low + High) / 2;
   if (x == Arr[Mid])
   {

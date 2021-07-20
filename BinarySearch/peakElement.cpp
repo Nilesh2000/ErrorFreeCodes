@@ -5,6 +5,9 @@ In a decreasing array, first element is peak element.
 In an array with all elements are same, every element is a peak element.
 Time Complexity : O(log n)
 Use a divide and conquer algorithm.
+
+Why do we use Binary Search in an Unsorted Algorithm Here?
+https://leetcode.com/problems/find-peak-element/discuss/50232/Find-the-maximum-by-binary-search-(recursion-and-iteration)
 */
 
 #include <iostream>

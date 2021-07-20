@@ -11,6 +11,7 @@ int countOf1s(int Arr[], int Low, int High)
         int Mid = Low + (High - Low) / 2; //Used instead of (Low+High)/2 to avoid integer overflow.
 
         //If the middle element is 1, and the next element is 0 , then number of 1s will be Mid+1
+        // The second or condition (Mid == High) comes into play if the array consists of 1s only
         if ((Arr[Mid] == 1) && (Arr[Mid + 1] == 0 || Mid == High))
         {
             return Mid + 1;

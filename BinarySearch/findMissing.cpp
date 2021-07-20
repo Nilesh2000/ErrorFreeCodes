@@ -2,7 +2,7 @@
 Given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in list. One of the integers is missing in the list.
 Write an efficient code to find the missing integer.
 */
-# include <iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -12,14 +12,14 @@ int findMissing(int Arr[], int n)
     /*
     The logic here is that if the array is sorted and contains all the elements, then Arr[Pos] - Pos will be equal to 1.
     */
-    while(High - Low > 1)
+    while (High - Low > 1)
     {
         Mid = (Low + High) / 2;
-        if((Arr[Low] - Low) != (Arr[Mid] - Mid)) //If true, search towards left
+        if ((Arr[Low] - Low) != (Arr[Mid] - Mid)) //If true, search towards left
         {
             High = Mid;
         }
-        else if((Arr[High] - High) != (Arr[Mid] - Mid)) //Else, search towards right
+        else if ((Arr[High] - High) != (Arr[Mid] - Mid)) //Else, search towards right
         {
             Low = Mid;
         }
