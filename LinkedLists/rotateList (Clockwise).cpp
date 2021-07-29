@@ -1,5 +1,5 @@
 //A program to rotate the elements of a linked list in clockwise fashion.
-# include <iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -9,82 +9,89 @@ struct Node
   Node *Next;
 };
 
-Node *Head = NULL; //List is initially empty.
-
-void insertAtEnd(int x)
+Node *insertAtEnd(Node *Head, int x)
 {
-    Node *Temp = new Node(); //Allocate memory to create a new node.
-    Temp -> Data = x; //Initialize the Data of the node to the parameter passed.
-      if(Head == NULL) //Check if the list is initially empty.
-        {
-            Head = Temp; //Set the address of the newly allocated node to Head.
-            return ;
-        }
-    //If the list is not empty,
+  Node *Temp = new Node();
+  Temp->Data = x;
+  Temp->Next = NULL;
 
-    Node *lastNode = Head; //Set a temporary variable of type Node to Head.
+  if (Head == NULL)
+  {
+    Head = Temp;
+    return Head;
+  }
 
-    while(lastNode -> Next != NULL) //Traverse the linked list till the end of the list.
-      {
-          lastNode = lastNode -> Next; //Keep moving to the next node.
-      }
-  lastNode -> Next = Temp; //Set the address of the last node to the newly allocated node in memory.
+  Node *lastNode = Head;
+  while (lastNode->Next != NULL)
+  {
+    lastNode = lastNode->Next;
+  }
+
+  lastNode->Next = Temp;
+  return Head;
 }
 
-void printList()
+void printList(Node *Head)
 {
-    Node *Temp = Head;
-      while(Temp != NULL)
-        {
-            cout << Temp -> Data << " ";
-            Temp = Temp -> Next;
-        }
-}
-
-int lengthOfList()
-{
-  int Count = 0;
-  Node *Temp = Head;
-    while(Temp != NULL)
-      {
-          Count++;
-          Temp = Temp -> Next;
-      }
-  return Count;
+  while (Head != NULL)
+  {
+    cout << Head->Data << " ";
+    Head = Head->Next;
+  }
 }
 
 //Function which performs the job.
-void rotateList()
+Node *rotateList(Node *Head, int k)
 {
-    Node *Temp = Head, *Prev = NULL;
-    while(Temp -> Next != NULL) //We use Temp -> Next because we don't want Prev to go till the last node but only till the 2nd last node.
-    {
-        Prev = Temp;
-        Temp = Temp -> Next;
-    }
-    Prev -> Next = NULL; //This is done because there are no more nodes after the second last node.
-    Temp -> Next = Head; //This is done because new first node now points to the older first node whose address is currentlt stored in Head.
-    Head = Temp; //Set Head to the address of Temp as Temp is now the new first node.
+  if (k == 0)
+    return Head;
+
+  Node *mainPtr = Head, *refPtr = Head;
+
+  for (int i = 0; i < k; i++)
+    refPtr = refPtr->Next;
+
+  while (refPtr->Next != NULL)
+  {
+    refPtr = refPtr->Next;
+    mainPtr = mainPtr->Next;
+  }
+
+  refPtr->Next = Head;
+  Head = mainPtr->Next;
+  mainPtr->Next = NULL;
+
+  return Head;
+}
+
+int lengthOfList(Node *Head)
+{
+  int Len = 0;
+  while (Head != NULL)
+  {
+    Head = Head->Next;
+    Len++;
+  }
+  return Len;
 }
 
 int main(void)
 {
-    int n;
-    for(int i = 10 ; i <= 60 ; i += 10)
-    {
-        insertAtEnd(i);
-    }
-    printList();
-    cout << "\nEnter the number of rotations : ";
-    cin >> n;
-    int k = n % lengthOfList(); //Taking modulo because it is redundant to rotate the list more times than the number of elements in the
-                                //list.
-    cout << "List after rotating " << n << " time(s) is : ";
-    for(int i = 0 ; i < k ; i++)
-    {
-        rotateList();
-    }
-    printList();
-    cout << endl;
-    return 0;
+  int k = 9;
+
+  Node *Head = NULL;
+  for (int i = 10; i <= 60; i += 10)
+    Head = insertAtEnd(Head, i);
+
+  printList(Head);
+  cout << "\n";
+
+  // Find length of list
+  int Len = lengthOfList(Head);
+
+  k = k % Len;
+  Head = rotateList(Head, k);
+
+  printList(Head);
+  return 0;
 }
