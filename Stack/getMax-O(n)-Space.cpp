@@ -1,13 +1,14 @@
 //A program to calculate the largest element in a stack.
-# include <iostream>
-# include <stack>
+#include <iostream>
+#include <stack>
 
 using namespace std;
 
 class Stack
 {
-    stack <int> mainStack, trackStack;
-  public:
+    stack<int> mainStack, trackStack;
+
+public:
     /*
     Create an auxiliary stack, say ‘trackStack’ to keep the track of maximum element
     Push the first element to both mainStack and the trackStack.
@@ -19,13 +20,13 @@ class Stack
     void pushData(int x)
     {
         mainStack.push(x);
-        if(mainStack.size() == 1)
+        if (mainStack.size() == 1)
         {
             trackStack.push(x);
-            return ;
+            return;
         }
 
-        if(x > trackStack.top())
+        if (x > trackStack.top())
         {
             trackStack.push(x);
         }
