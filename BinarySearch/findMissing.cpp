@@ -16,13 +16,10 @@ int findMissing(int Arr[], int n)
     {
         Mid = (Low + High) / 2;
         if ((Arr[Low] - Low) != (Arr[Mid] - Mid)) //If true, search towards left
-        {
             High = Mid;
-        }
+
         else if ((Arr[High] - High) != (Arr[Mid] - Mid)) //Else, search towards right
-        {
             Low = Mid;
-        }
     }
     return (Arr[Mid] + 1); //Return element at Mid + 1 as that will be the missing element. Mid will be the missing position.
 }
