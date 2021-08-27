@@ -1,56 +1,66 @@
-//A program to rotate a 2-dimensional matrix in the clockwise dierection.
+/*
+A program to rotate a 2-dimensional matrix in the clockwise dierection.
+
+If it is a square matrix, it can be transposed in-place.
+Otherwise we will have to allocate extra memory.
+
+Approach:
+Transpose the matrix in-place
+Reverse each row of the matrix in-place
+
+Time Complexity : O(n^2)
+Space Complexity : O(n)
+*/
+
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
 //Function to print the matrix
-void printMatrix(int Arr[][3])
+void printMatrix(vector<vector<int>> matrix)
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < matrix.size(); i++)
     {
-        for (int j = 0; j < 3; j++)
+        for (int j = 0; j < matrix[i].size(); j++)
         {
-            cout << Arr[i][j] << " ";
+            cout << matrix[i][j] << " ";
         }
         cout << "\n";
     }
 }
 
-//The idea here is to first transpose the existing matrix and then swap the ith and (n-i)th columns of the result transpose matrix. In this way, we get a matrix which has been rotated in the clockwise dierection by 90 degrees.
-void rotateClockwise(int Arr[][3])
+void transposeMatrix(vector<vector<int>> &matrix)
 {
-    int Transpose[3][3];
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            Transpose[i][j] = Arr[j][i];
-        }
-    }
+    for (int i = 0; i < matrix.size(); i++)
+        for (int j = i + 1; j < matrix[i].size(); j++)
+            swap(matrix[i][j], matrix[j][i]);
+}
 
-    int n = 3;
+void rotateClockwise(vector<vector<int>> &matrix)
+{
+    transposeMatrix(matrix);
+
+    int n = matrix.size();
     for (int i = 0; i < n; i++)
-    {
-        for (int j = 0, k = n - 1; j < n / 2; j++, k--)
-        {
-            int Temp = Transpose[i][j];
-            Transpose[i][j] = Transpose[i][k];
-            Transpose[i][k] = Temp;
-        }
-    }
-    printMatrix(Transpose);
+        reverse(matrix[i].begin(), matrix[i].end());
+
+    printMatrix(matrix);
 }
 
 //Driver function
 int main(void)
 {
-    int Mat[3][3] = {
+    vector<vector<int>> Mat = {
         {1, 2, 3},
         {4, 5, 6},
         {7, 8, 9}};
     printMatrix(Mat);
+
     cout << "\nMatrix after rotating in clockwise dierection:-\n";
     rotateClockwise(Mat);
+
     return 0;
 }
 //End of program
