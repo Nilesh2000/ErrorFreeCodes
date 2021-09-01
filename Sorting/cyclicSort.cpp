@@ -26,7 +26,7 @@ vector<int> cyclicSort(vector<int> V)
 
         // If the computed index for V[i] does not match its actual index, swap it
         if (V[i] != V[correct])
-            swap(V[i], V[V[i] - 1]);
+            swap(V[i], V[correct]);
         else
             i++;
     }

@@ -1,4 +1,4 @@
-// Given an unsorted array of size n, one number is missing and one number occurs twice in the array. Find both these numbers.
+// Given an unsorted array of size n containing elements in the range of [1,n], one number is missing and one number occurs twice in the array. Find both these numbers.
 
 /*
 Approach 1 : HashMap
@@ -18,23 +18,27 @@ https://www.youtube.com/watch?v=5nMGY4VUoRY&t=652s&ab_channel=takeUforward
 Time Complexity : O(5n)
 Space Complexity : O(1)
 
+Approach 4 : Cyclic Sort
+Will work only if the elements in the array are in the range of [1,n]
+If V[i]!=i+1, V[i] will be the repeating numeber and i+1 will be the missing number
+
 The rightmost set bit in the binary representation of a number is the position of the rightmost 1 when a binary number is read from right to left.
 */
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
-void findRepeatingAndMissing(int Arr[], int n)
+vector<int> findRepeatingAndMissing(vector<int> V)
 {
-    int xor1 = Arr[0];
+    int n = V.size();
+    int xor1 = V[0];
+
     for (int i = 1; i < n; i++)
-    {
-        xor1 ^= Arr[i];
-    }
+        xor1 ^= V[i];
+
     for (int i = 1; i <= n; i++)
-    {
         xor1 ^= i;
-    }
 
     // Get the rightmost set bit in set_bit_no
     int set_bit_no = xor1 & ~(xor1 - 1);
@@ -45,13 +49,13 @@ void findRepeatingAndMissing(int Arr[], int n)
 
     for (int i = 0; i < n; i++)
     {
-        if (Arr[i] & set_bit_no)
-        { // If Arr[i] belongs to the first set
-            *x = *x ^ Arr[i];
+        if (V[i] & set_bit_no)
+        { // If V[i] belongs to the first set
+            *x = *x ^ V[i];
         }
         else
         {
-            *y = *y ^ Arr[i];
+            *y = *y ^ V[i];
         }
     }
 
@@ -67,14 +71,45 @@ void findRepeatingAndMissing(int Arr[], int n)
         }
     }
 
-    cout << "The Missing element is : " << *x;
-    cout << "\nThe Repeating element is : " << *y;
+    vector<int> V1 = {*x, *y};
+    return V1;
+}
+
+vector<int> findRepeatingAndMissingCyclicSort(vector<int> V)
+{
+    int i = 0, n = V.size();
+    while (i < n)
+    {
+        int correct = V[i] - 1;
+        if (V[i] != V[correct])
+            swap(V[i], V[correct]);
+        else
+            i++;
+    }
+
+    vector<int> V2;
+    for (int i = 0; i < n; i++)
+    {
+        if (V[i] != i + 1)
+        {
+            V2.push_back(i + 1);
+            V2.push_back(V[i]);
+        }
+    }
+    return V2;
 }
 
 int main(void)
 {
-    int Arr[] = {1, 3, 4, 4, 5};
-    int n = sizeof(Arr) / sizeof(Arr[0]);
-    findRepeatingAndMissing(Arr, n);
+    vector<int> V = {1, 4, 3, 4, 5};
+
+    vector<int> V1 = findRepeatingAndMissing(V);
+    for (auto num : V1)
+        cout << num << " ";
+    cout << '\n';
+
+    vector<int> V2 = findRepeatingAndMissingCyclicSort(V);
+    for (auto num : V2)
+        cout << num << " ";
     return 0;
 }

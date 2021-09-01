@@ -1,40 +1,44 @@
-//Given an array of n integers, print all the elements of the list which occur more than once in the list.
-//Time Complexity : O(n)
-//Space Complexity : O(n)
+/*
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+*/
+
 #include <iostream>
-#include <unordered_set>
+#include <vector>
 
 using namespace std;
 
-void findDuplicates(int Arr[], int n)
+vector<int> allDuplicates(vector<int> V)
 {
-    //No element can be present twice in an unordered set, that is no duplicates are allowed.
-    unordered_set<int> Set;
-    unordered_set<int> dupSet;
+    int i = 0;
+    int n = V.size();
+
+    vector<int> Dup;
+
+    while (i < n)
+    {
+        int correct = V[i] - 1;
+        if (V[i] != V[correct])
+            swap(V[i], V[correct]);
+        else
+            i++;
+    }
+
     for (int i = 0; i < n; i++)
     {
-        if (Set.find(Arr[i]) == Set.end())
-        //Set.end() is does not point to the last element of the list, but returns an iterator to the theoretical element that follows last element in the set.
-        {
-            Set.insert(Arr[i]);
-        }
-        else
-        {
-            dupSet.insert(Arr[i]);
-        }
+        if (i != V[i] - 1)
+            Dup.push_back(V[i]);
     }
-    cout << "\nThe duplicates are : ";
-    unordered_set<int>::iterator it;
-    for (it = dupSet.begin(); it != dupSet.end(); it++)
-    {
-        cout << *it << " ";
-    }
+
+    return Dup;
 }
 
-int main(void)
+int main()
 {
-    int Arr[] = {3, 4, 5, 2, 9, 1, 2, 4, 3, 5, 11};
-    int Size = sizeof(Arr) / sizeof(Arr[0]);
-    findDuplicates(Arr, Size);
+    vector<int> V = {4, 3, 2, 7, 8, 2, 3, 1};
+    vector<int> Dup = allDuplicates(V);
+
+    for (auto num : Dup)
+        cout << num << " ";
+
     return 0;
 }
