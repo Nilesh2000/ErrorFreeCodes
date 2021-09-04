@@ -1,70 +1,111 @@
 /*
-This problem was asked by Amazon.
 An sorted array of integers was rotated an unknown number of times.
-Given such an array, find the index of the element in the array in faster than linear time. If the element doesn't exist in the array, return null.
+Given such an array, find the index of the element in the array in faster than linear time. 
+If the element doesn't exist in the array, return -1
+
 For example, given the array [13, 18, 25, 2, 8, 10] and the element 8, return 4 (the index of 8 in the array).
 You can assume all the integers in the array are unique.
-Check out https://leetcode.com/submissions/detail/533624657/ where we write an optimal solution according to LeetCode
+
+APPROACH:-
+Find the pivot index in the given array, i.e the index of the largest element in the given rotated sorted array.
+If the element to be searched is equal to the element at the pivot index then print the index of the pivot.
+If the element to be searched is greater than the element at the pivot index then the element does not exist in the array.
+If the element to be searched is less than the element at a pivot index then search for the element in both halves of the array using binary search.
+
+Time Complexity : O(log n)
+Space Complexity : O(1)
 */
+
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int circularArraySearch(int Arr[], int n, int x)
+// Method to return the index of the largest element
+int pivotIndex(vector<int> V)
 {
-  int Low = 0, High = n - 1, Mid;
-  while (Low <= High)
-  {
-    Mid = Low + (High - Low) / 2;
-    if (x == Arr[Mid]) //Return Mid if x is found
+    int n = V.size();
+    int Low = 0, High = n - 1;
+
+    while (Low <= High)
     {
-      return Mid;
+        int Mid = Low + (High - Low) / 2;
+
+        /*
+        There can only be 1 index in the array where V[Mid]<V[Mid-1].
+        That element at that index will be the smallest element in the array.
+        Then V[Mid-1] will be the largest element in the array
+        */
+        if (Mid > Low && V[Mid] < V[Mid - 1])
+            return Mid - 1;
+
+        /*
+        There can only be 1 index in the array where V[Mid] > V[Mid+1].
+        That element at that index will be the largest element in the array.
+        */
+        if (Mid < High && V[Mid] > V[Mid + 1])
+            return Mid;
+
+        // If this is true, it indicates that the array is rotated and we have to search towards the left
+        if (V[Mid] <= V[Low])
+            High = Mid - 1;
+
+        else
+            Low = Mid + 1;
     }
-    else if (Arr[Mid] >= Arr[Low]) //Left Half Of The Array is Sorted
-    {
-      if (x >= Arr[Low] && x < Arr[Mid])
-      {
-        High = Mid - 1; //Go searching in the left sorted half
-      }
-      else
-      {
-        Low = Mid + 1; //Go towards right
-      }
-    }
-    else if (Arr[Mid] <= Arr[High]) //Right Half Of The Array is Sorted
-    {
-      if (x > Arr[Mid] && x <= Arr[High]) // Condition to check if the element to be searched is in the sorted subset of the array
-      {
-        Low = Mid + 1; //Go for searching in the right sorted half.
-      }
-      else
-      {
-        High = Mid - 1; //Go towards the left.
-      }
-    }
-  }
-  return -1;
+    // If array is not rotated itself, then V[n-1] will be the largest element
+    return n - 1;
 }
 
-void displayIndex(int Flag)
+int binarySearch(vector<int> V, int Low, int High, int x)
 {
-  if (Flag != -1)
-  {
-    printf("\nElement Found At Index %d.", Flag);
-  }
-  else
-  {
-    printf("\nElement Not Found.\n");
-  }
+    if (Low <= High)
+    {
+        int Mid = Low + (High - Low) / 2;
+
+        if (x == V[Mid])
+            return Mid;
+
+        else if (x > V[Mid])
+            return binarySearch(V, Mid + 1, High, x);
+
+        else if (x < V[Mid])
+            return binarySearch(V, Low, Mid - 1, x);
+    }
+    return -1;
+}
+
+int circularArraySearch(vector<int> V, int x)
+{
+    int n = V.size();
+
+    int pivotInd = pivotIndex(V);
+
+    if (x == V[pivotInd])
+        return pivotInd;
+
+    else if (x > V[pivotInd])
+        return -1;
+
+    else
+    {
+        int Pos = binarySearch(V, 0, pivotInd - 1, x);
+        if (Pos != -1)
+            return Pos;
+
+        Pos = binarySearch(V, pivotInd + 1, n - 1, x);
+        if (Pos != -1)
+            return Pos;
+    }
+    return -1;
 }
 
 int main(void)
 {
-  int Array[] = {31, 38, 5, 8, 10, 12, 15, 22, 23, 28};
-  int Size = sizeof(Array) / sizeof(Array[0]), firstSearch = 8, secondSearch = 29;
-  int firstStatus = circularArraySearch(Array, Size, firstSearch);
-  int secondStatus = circularArraySearch(Array, Size, secondSearch);
-  displayIndex(firstStatus);
-  displayIndex(secondStatus);
-  return 0;
+    vector<int> V = {31, 38, 5, 8, 10, 12, 15, 22, 23, 28};
+    int x = 29;
+
+    cout << circularArraySearch(V, x);
+
+    return 0;
 }

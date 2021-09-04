@@ -35,13 +35,9 @@ int elementOccurringOnce(int Arr[], int n)
     {
         int Mid = Low + (High - Low) / 2;
         if ((Mid % 2 == 0 && Arr[Mid] == Arr[Mid + 1]) || (Mid % 2 == 1 && Arr[Mid] == Arr[Mid - 1]))
-        {
             Low = Mid + 1;
-        }
         else
-        {
             High = Mid;
-        }
     }
     return Arr[Low];
 }

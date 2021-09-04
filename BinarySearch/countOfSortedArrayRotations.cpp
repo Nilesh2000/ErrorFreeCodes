@@ -1,47 +1,61 @@
+/*
+Consider an array of distinct numbers sorted in increasing order. 
+The array has been rotated (clockwise) k number of times. 
+Given such an array, find the value of k.
+
+The idea here is to find the smallest element in the array.
+The index of the smallest element will be the number of times the array was rotated.
+
+A rotated sorted array can also be thought of as two sorted arrays which are appened together.
+The pivot element will be the largest element
+[0...pivot] - Sorted in increasing order
+[pivot...pivot+1] - Sorted in decreasing order
+[pivot+1...n-1] - Sorted in increasing order
+
+Time Complexity : O(log n)
+Space Complexity : O(1)
+*/
+
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int findRotationCount(int Arr[], int n)
+int findRotationCount(vector<int> V)
 {
-  int Low = 0, High = n - 1, Mid;
-  //The underlying principle is that there will be one such element in the array called a pivot element whose previous and
-  //next element will be greater than the pivot element.
+  int n = V.size();
+  int Low = 0, High = n - 1;
+
   while (Low <= High)
   {
-    if (Arr[Low] <= Arr[High]) //Check if array is already sorted.
-    {
-      return Low;
-    }
-    Mid = Low + (High - Low) / 2;
-    int Next = (Mid + 1) % n;     //Next Element Will Be (Mid + 1)%n. Calculating remainder is necessary if the last
-                                  //element is Mid, thus Mid + 1 will go out of bounds of the array. Thus, it is
-                                  //necessary to calculate remainder with the size of the array.
-    int Prev = (Mid + n - 1) % n; //Previous Element Will Be  (Mid + n - 1) and cannot be Mid - 1 becuase if the
-                                  //Middle Element is A[0] , then A[-1] will be an invalid expression.
+    int Mid = Low + (High - Low) / 2;
 
-    if (Arr[Mid] <= Arr[Next] && Arr[Mid] <= Arr[Prev]) //Check if Arr[Mid] is the pivot element.
-    {
+    // There can only be 1 index in the array where V[Mid]<V[Mid-1].
+    // That element at tha index will be the smallest element in the array.
+    if (Mid > Low && V[Mid] < V[Mid - 1])
       return Mid;
-    }
-    else if (Arr[Mid] <= Arr[High]) //Check if Arr[Mid] is a part of the sorted right half of the array.
-    {
+
+    // There can only be 1 index in the array where V[Mid] > V[Mid+1].
+    // That index will be the largest element in the array
+    // Then, Mid+1 will be the index of the smallest element
+    if (Mid < High && V[Mid] > V[Mid + 1])
+      return Mid + 1;
+
+    // If this is true, it indicates that the array is rotated and we have to search towards the left
+    if (V[Mid] <= V[Low])
       High = Mid - 1;
-    }
-    else if (Arr[Mid] >= Arr[Low]) //Check if Arr[Mid] is a part of the sorted left half of the array.
-    {
+
+    else
       Low = Mid + 1;
-    }
   }
-  return -1;
+
+  // The array was not rotated or rotated n times
+  return 0;
 }
 
 int main(void)
 {
-  int Array[] = {31, 38, 5, 8, 10, 12, 15, 22, 23, 28};
-  int Size = sizeof(Array) / sizeof(Array[0]);
-  int Count = findRotationCount(Array, Size);
-  cout << "\nArray Is Rotated " << Count << " time(s) after sorting.\n"
-       << endl;
+  vector<int> V = {31, 38, 5, 8, 10, 12, 15, 22, 23, 28};
+  cout << findRotationCount(V);
   return 0;
 }

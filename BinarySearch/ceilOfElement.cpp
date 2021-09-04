@@ -1,54 +1,53 @@
 /*
 Given a sorted array and a value x, find the ceil of x.
-The floor of x is the smallest element in array larger than or equal to x.
+The ceil of x is the smallest element in array larger than or equal to x.
 Write an efficient function to find ceil of x.
+
+Time Complexity : O(log n)
+Space Complexity : O(1)
 */
+
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int ceilOfAnElement(int Arr[], int Low, int High, int Num)
+int ceilOfAnElement(vector<int> V, int Num)
 {
-    if (Num > Arr[High])
+    int n = V.size();
+    int Low = 0, High = n - 1;
+
+    if (Num > V[High])
         return -1;
 
-    if (Num <= Arr[Low])
-        return Arr[0];
+    if (Num <= V[Low])
+        return 0;
 
     while (Low <= High)
     {
-        int Mid = (Low + High) / 2;
-        if (Arr[Mid] == Num)
+        int Mid = Low + (High - Low) / 2;
+        if (V[Mid] == Num)
             return Mid;
 
-        else if (Arr[Mid] < Num)
-        {
-            if (Mid + 1 <= High && Num <= Arr[Mid + 1])
-                return Mid + 1;
-            else
-                return ceilOfAnElement(Arr, Mid + 1, High, Num);
-        }
+        else if (V[Mid] > Num)
+            High = Mid - 1;
 
-        else if (Arr[Mid] > Num)
-        {
-            if (Mid - 1 >= Low && Num > Arr[Mid - 1])
-                return Mid;
-            else
-                return ceilOfAnElement(Arr, Low, Mid - 1, Num);
-        }
+        else
+            Low = Mid + 1;
     }
-    return -1;
+    return Low;
 }
 
 int main(void)
 {
-    int Arr[] = {1, 2, 4, 7, 9, 13, 17};
-    int n = sizeof(Arr) / sizeof(Arr[0]);
-    int x1 = 11; //Set x1 as 0 to execute else condition.
-    int Index1 = ceilOfAnElement(Arr, 0, n - 1, x1);
-    if (Index1 == -1)
-        cout << "\nCeil of " << x1 << " does not exist in the array.";
+    vector<int> V = {1, 2, 4, 7, 9, 13, 17};
+    int x1 = 15;
+
+    int Index = ceilOfAnElement(V, x1);
+
+    if (Index == -1)
+        cout << "Ceil Does Not Exist";
     else
-        cout << "\nCeil of " << x1 << " is : " << Arr[Index1];
+        cout << V[Index];
     return 0;
 }

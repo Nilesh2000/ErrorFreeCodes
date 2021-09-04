@@ -2,48 +2,52 @@
 Given a sorted array and a value x, find the floor of x.
 The floor of x is the largest element in array smaller than or equal to x.
 Write an efficient function to find floor of x.
+
+Time Complexity : O(log n)
+Space Complexity : O(1)
 */
+
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int floorOfAnElement(int Arr[], int n, int Num)
+int floorOfAnElement(vector<int> V, int Num)
 {
-  int Low = 0, High = n - 1;
+    int n = V.size();
+    int Low = 0, High = n - 1;
 
-  if (Num >= Arr[High])
+    if (Num >= V[High])
+        return High;
+
+    if (Num < V[Low])
+        return -1;
+
+    while (Low <= High)
+    {
+        int Mid = Low + (High - Low) / 2;
+
+        if (V[Mid] == Num)
+            return Mid;
+
+        else if (V[Mid] < Num)
+            Low = Mid + 1;
+        else
+            High = Mid - 1;
+    }
     return High;
-
-  if (Num < Arr[Low])
-    return -1;
-
-  while (Low <= High)
-  {
-    int Mid = (Low + High) / 2;
-    if (Arr[Mid] == Num)
-      return Mid;
-
-    else if (Arr[Mid - 1] <= Num && Arr[Mid] > Num && Mid > 0)
-      return Mid - 1;
-
-    else if (Arr[Mid] > Num)
-      High = Mid - 1;
-
-    else
-      Low = Mid + 1;
-  }
-  return -1;
 }
 
 int main(void)
 {
-  int Arr[] = {1, 2, 4, 7, 9, 13, 17};
-  int n = sizeof(Arr) / sizeof(Arr[0]);
-  int x1 = 11; //Set x1 as 0 to execute else condition.
-  int Index1 = floorOfAnElement(Arr, n, x1);
-  if (Index1 == -1)
-    cout << "\nFloor of " << x1 << " does not exist in the array.";
-  else
-    cout << "\nFloor of " << x1 << " is : " << Arr[Index1];
-  return 0;
+    vector<int> V = {1, 2, 4, 7, 9, 13, 17};
+    int x1 = 12;
+    int Index = floorOfAnElement(V, x1);
+
+    if (Index == -1)
+        cout << "Floor Does Not Exist";
+    else
+        cout << V[Index];
+
+    return 0;
 }
