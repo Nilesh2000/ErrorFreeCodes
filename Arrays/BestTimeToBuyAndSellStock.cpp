@@ -29,6 +29,21 @@ Space Complexity : O(1)
 
 using namespace std;
 
+int maxProfitBruteForce(vector<int> V)
+{
+    int maxProfit = INT_MIN;
+    int n = V.size();
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (V[j] - V[i] > maxProfit)
+                maxProfit = V[j] - V[i];
+        }
+    }
+    return maxProfit;
+}
+
 int maxProfit(vector<int> V)
 {
     int minPrice = INT_MAX;
@@ -48,6 +63,7 @@ int main(void)
 {
     vector<int> V = {7, 1, 5, 3, 6, 4};
     // vector<int> V = {4, 4, 4, 4};
+    cout << maxProfitBruteForce(V) << '\n';
     cout << maxProfit(V);
     return 0;
 }
