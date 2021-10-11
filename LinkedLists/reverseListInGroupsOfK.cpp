@@ -24,25 +24,29 @@ struct Node
 {
     int Data;
     Node *Next;
+
+    Node(int x)
+    {
+        Data = x;
+        Next = NULL;
+    }
 };
 
 Node *insertAtEnd(Node *Head, int x)
 {
-    Node *newNode = new Node();
-    newNode->Data = x;
-    newNode->Next = NULL;
+    Node *Temp = new Node(x);
 
     if (Head == NULL)
     {
-        Head = newNode;
+        Head = Temp;
         return Head;
     }
 
-    Node *Temp = Head;
-    while (Temp->Next != NULL)
-        Temp = Temp->Next;
+    Node *lastNode = Head;
+    while (lastNode->Next != NULL)
+        lastNode = lastNode->Next;
 
-    Temp->Next = newNode;
+    lastNode->Next = Temp;
     return Head;
 }
 
@@ -52,7 +56,7 @@ Node *reverseKNodes(Node *Head, int k)
     if (Head == NULL || Head->Next == NULL || k == 1)
         return Head;
 
-    // Go to (k+1)th node to check if there are 'k' elemenets to reverse
+    // Go to (k+1)th node to check if there are 'k' elements to reverse
     int Count = 0;
     Node *Temp = Head;
     while (Temp != NULL && ++Count < k)

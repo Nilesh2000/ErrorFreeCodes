@@ -1,5 +1,26 @@
-//A program to print the middle Element of a linked list.
-# include <iostream>
+/*
+Given the head of a singly linked list, return the middle node of the linked list.
+If there are two middle nodes, return the second middle node.
+
+APPROACH 1:
+1. Calculate the length of the list. Let it be n.
+2. Calculate n/2.
+3. Traverse from Head till n/2 nodes. Return the n/2th node.
+
+Time Complexity : O(3N/2)
+Space Complexity : O(1)
+
+APPROACH 2:
+1. Declare 2 pointers slow and fast.
+2. Both slow and fast point to Head initially.
+3. Move slow by one pointer forward and fast by two pointers forward until fast or fast->next is not NULL.
+4. slow is now at the middle of the list.
+
+Time Complexity : O(N)
+Space Complexity : O(1)
+*/
+
+#include <iostream>
 
 using namespace std;
 
@@ -7,65 +28,56 @@ struct Node
 {
   int Data;
   Node *Next;
+
+  Node(int x)
+  {
+    Data = x;
+    Next = NULL;
+  }
 };
 
-Node *Head = NULL; //List is initially empty.
-
-void insertAtEnd(int x)
+Node *insertAtEnd(Node *Head, int x)
 {
-    Node *Temp = new Node(); //Allocate memory to create a new node.
-    Temp -> Data = x; //Initialize the Data of the node to the parameter passed.
-      if(Head == NULL) //Check if the list is initially empty.
-        {
-            Head = Temp; //Set the address of the newly allocated node to Head.
-            return ;
-        }
-    //If the list is not empty,
+  Node *Temp = new Node(x);
 
-    Node *lastNode = Head; //Set a temporary variable of type Node to Head.
+  if (Head == NULL)
+  {
+    Head = Temp;
+    return Head;
+  }
 
-    while(lastNode -> Next != NULL) //Traverse the linked list till the end of the list.
-      {
-          lastNode = lastNode -> Next; //Keep moving to the next node.
-      }
-  lastNode -> Next = Temp; //Set the address of the last node to the newly allocated node in memory.
+  Node *lastNode = Head;
+  while (lastNode->Next != NULL)
+    lastNode = lastNode->Next;
+
+  lastNode->Next = Temp;
+  return Head;
 }
 
-/*
-Traverse the linked list using two pointers. Move one pointer by one and other pointer by two. When the fast pointer reaches end slow pointer will
-reach middle of the linked list.
-*/
-
-int middleElement(Node *A)
+Node *middleElement(Node *Head)
 {
-    Node *Fast_Ptr = A;
-    Node *Slow_Ptr = A;
-    //We have to check for both the conditions in the while loop as the linked list may have even or odd number of elements.
-      while(Fast_Ptr != NULL && Fast_Ptr -> Next != NULL)
-        {
-            Fast_Ptr = Fast_Ptr -> Next -> Next;
-            Slow_Ptr = Slow_Ptr -> Next;
-        }
-    return Slow_Ptr -> Data;
-}
+  Node *fastPtr = Head;
+  Node *slowPtr = Head;
 
-void printList()
-{
-    Node *Temp = Head;
-      while(Temp != NULL)
-        {
-            cout << Temp -> Data << " ";
-            Temp = Temp -> Next;
-        }
+  while (fastPtr != NULL && fastPtr->Next != NULL)
+  {
+    fastPtr = fastPtr->Next->Next;
+    slowPtr = slowPtr->Next;
+  }
+  return slowPtr;
 }
 
 int main(void)
 {
-    insertAtEnd(3);
-    insertAtEnd(5);
-    insertAtEnd(7);
-    insertAtEnd(11);
-    insertAtEnd(13);
-    printList();
-    cout << "\nThe Middle Element Of The Linked List Is : " << middleElement(Head) << endl;
+  Node *Head = NULL;
+
+  Head = insertAtEnd(Head, 3);
+  Head = insertAtEnd(Head, 5);
+  Head = insertAtEnd(Head, 7);
+  Head = insertAtEnd(Head, 11);
+  Head = insertAtEnd(Head, 13);
+
+  cout << middleElement(Head)->Data;
+
+  return 0;
 }

@@ -164,7 +164,7 @@ bool isListPalindromeSpaceEfficient(Node *Head)
     return true;
 }
 
-int main(void) //Driver function
+int main(void)
 {
     Node *Head = NULL;
     Head = insertAtEnd(Head, 1);
