@@ -1,41 +1,55 @@
-// C++ program to search an element in row-wise and column-wise sorted matrix
+/* 
+Program to search an element in row-wise and column-wise sorted matrix
+
+APPROACH:
+1. Find the smallest and largest element
+2. Start searching from the top right element.
+3. If search > M[i][j], go downwards
+4. If search < M[i][j], go left
+5. Else element is found
+
+Time Complexity : O(M + N)
+Space Complexity : O(1)
+*/
+
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
-void sortedSearch(int Mat[4][4], int n, int x)
+bool sortedSearch(vector<vector<int>> M, int x)
 {
-	int smallest = Mat[0][0], largest = Mat[n - 1][n - 1];
+	int numRows = M.size();
+	int numCols = M[0].size();
+
+	int smallest = M[0][0], largest = M[numRows - 1][numCols - 1];
 	if (x < smallest || x > largest)
-	{
-		cout << "\nElement is not present in the matrix.";
-		return;
-	}
+		return false;
 
 	//Set indexes for top right element
-	int i = 0, j = n - 1;
-	while (i < n && j >= 0)
+	int i = 0, j = numCols - 1;
+	while (i < numRows && j >= 0)
 	{
-		if (Mat[i][j] == x)
-		{
-			cout << "n Found at " << i << ", " << j;
-			return;
-		}
-		if (Mat[i][j] > x)
+		if (M[i][j] == x)
+			return true;
+
+		if (M[i][j] > x)
 			j--;
-		else // if mat[i][j] < x
+		else // if M[i][j] < x
 			i++;
 	}
-	cout << "Element not found";
+	return false;
 }
 
 int main(void)
 {
-	int Mat[4][4] = {{10, 20, 30, 40},
-									 {15, 25, 35, 45},
-									 {27, 29, 37, 48},
-									 {32, 33, 39, 50}};
-	// sortedSearch(Mat, 4, 31);
-	sortedSearch(Mat, 4, 29);
+	vector<vector<int>> M = {{10, 20, 30, 40},
+							 {15, 25, 35, 45},
+							 {27, 29, 37, 48},
+							 {32, 33, 39, 50}};
+
+	cout << sortedSearch(M, 29);
+	cout << sortedSearch(M, 31);
+
 	return 0;
 }
-//End of program

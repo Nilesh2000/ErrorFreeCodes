@@ -24,6 +24,11 @@ Deletion the smallest element:-
 3. Then, we set V[0] to V[Size-1].
 4. This may not be the right position for V[0].
 5. Hence, we bubble down the heap.
+
+Time Complexities :-
+ExtractMin() - O(1)
+Insert() - O(log n)
+Delete() - O(log n)
 */
 
 #include <iostream>

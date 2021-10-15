@@ -18,21 +18,24 @@ Space Complexity : O(1)
 */
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int secondLargestElement(int Arr[], int n)
+int secondLargestElement(vector<int> V)
 {
-    if (n < 2)
+    if (V.size() < 2)
         return -1;
+
     int largest, secondLargest;
-    largest = secondLargest = Arr[0];
-    for (int i = 0; i < n; i++)
+    largest = secondLargest = V[0];
+
+    for (auto num : V)
     {
-        if (Arr[i] > largest)
+        if (num > largest)
         {
             secondLargest = largest;
-            largest = Arr[i];
+            largest = num;
         }
     }
     return secondLargest;
@@ -40,8 +43,7 @@ int secondLargestElement(int Arr[], int n)
 
 int main(void)
 {
-    int Arr[] = {1, 3, 4, 5, 2};
-    int n = sizeof(Arr) / sizeof(Arr[0]);
-    cout << "The Second Largest Element In The Array Is : " << secondLargestElement(Arr, n);
+    vector<int> V = {1, 3, 4, 5, 2};
+    cout << secondLargestElement(V);
     return 0;
 }

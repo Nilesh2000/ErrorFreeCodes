@@ -10,7 +10,7 @@ We have to find the maximum element to the left of V[i]
 We have to find the maximum element to the right of V[i].
 And then, we have to calculate min(leftMax(V[i], rightMax(V[i])) - V[i]
 We then return the sum of units of the rainwater trapped
-
+ 
 Time Complexity : O(n^2)
 Space Complexity : O(1)
 
@@ -22,7 +22,10 @@ Space Complexity : O(n) + O(n) ~ O(n)
 Two Pointer Approach:-
 Time Complexity : O(n)
 Space Complexity : O(1)
+
+https://www.youtube.com/watch?v=m18Hntz4go8&list=PLgUwDviBIf0p4ozDR_kJJkONnb1wdx2Ma&index=43&ab_channel=takeUforward
 */
+
 #include <iostream>
 #include <vector>
 

@@ -1,5 +1,6 @@
 /*
 Given an array, find the length of the largest subarray whose sum is equal to 0. Also, find the number of subarrays whose sum equals k.
+IMPORTANT : This problem can also be modified as 'Count of subarrays with XOR as k' instead of sum as 'k'.
 
 APPROACH:-
 Brute-Force

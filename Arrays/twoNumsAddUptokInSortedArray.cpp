@@ -29,7 +29,6 @@ void findPairs(int Arr[], int n, int Target)
   }
 }
 
-//Driver program
 int main()
 {
   int Arr[] = {1, 4, 7, 11, 12, 13, 15};
@@ -38,4 +37,3 @@ int main()
   findPairs(Arr, n, Sum);
   return 0;
 }
-//End of program

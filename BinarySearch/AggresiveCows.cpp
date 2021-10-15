@@ -39,6 +39,7 @@ If you can, store the Mid in Res and set Low=Mid+1 to maximize the minimum dista
 Time Complexity : O(N*LogN) (Sorting + (Binary Search*canPlaceCows))
 Space Complexity : O(1)
 */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
