@@ -4,16 +4,17 @@ Given an integer m, calculate it's nth root
 Time Complexity : O(n * log(m * 10^d))
 Space Complexity : O(1)
 */
+
 #include <iostream>
 
 using namespace std;
 
-double multiply(double Num, int n)
+double multiply(double num, int n)
 {
-    double Ans = 1.0;
+    double ans = 1.0;
     for (int i = 1; i <= n; i++)
-        Ans *= Num;
-    return Ans;
+        ans *= num;
+    return ans;
 }
 
 double findNthRoot(int m, int n)
@@ -38,8 +39,7 @@ double findNthRoot(int m, int n)
 
 int main(void)
 {
-    int m, n;
-    m = 16, n = 2;
+    int m = 16, n = 2;
     cout << findNthRoot(m, n);
     return 0;
 }

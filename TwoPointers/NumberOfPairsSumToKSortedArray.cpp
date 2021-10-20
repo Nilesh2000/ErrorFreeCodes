@@ -23,7 +23,6 @@ int numberOfPairsWhichSumToK(vector<int> V, int k)
 {
     int Low = 0, High = V.size() - 1;
     int c = 0;
-    vector<int> V = {};
 
     while (Low < High)
     {

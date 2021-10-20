@@ -1,36 +1,48 @@
-# include <iostream>
+/*
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
+
+OBSERVATION:
+We should not insert elements into a set since we do not have to return a vector, but an integer representing the new vector size.
+That is, we should move all the duplicates towards the end of the array.
+And then return the new size of the array.
+
+APPROACH:
+1. Maintain two pointers. Let i=0 and j=1.
+2. Iterate till the end of the vector. If V[i]!=V[j], move i forward and set V[i]=V[j].
+3. Return i+1 at after the for loop is elapsed.
+
+Time Complexity : O(N)
+Space Complexity : O(1)
+*/
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int removeDuplicates(int arr[], int n)
+int removeDuplicates(vector<int> &V)
 {
+    int n = V.size();
     if (n == 0 || n == 1) //If the array has no elements or 1 element, it has no duplicates.
         return n;
 
-    int j = 0;
-    for(int i = 0 ; i < n - 1 ; i++)  //Traverse till the second last element
+    int i = 0;
+    for (int j = 1; j < n; j++)
     {
-        if(arr[i] != arr[i + 1]) //If the two adjacent elements are dissimilar
+        if (V[i] != V[j])
         {
-            arr[j] = arr[i]; //Store value of Arr[i] in Arr[j]
-            j++; //increment j so that the next value be stored in the next index
+            i++;
+            V[i] = V[j];
         }
     }
-
-    arr[j] = arr[n - 1]; //Store the last element in Arr[j]
-    j++; //Increment j which is now the new size of the array. The number of elements in the array is j - 1.
-    return j; //Return j as it is the new updated size.
+    return i + 1;
 }
 
-//Driver function
 int main(void)
 {
-    int Arr[] = {0, 0, 1, 1, 2, 3, 3, 4, 4, 4, 5};
-    int n = sizeof(Arr) / sizeof(Arr[0]);
-    n = removeDuplicates(Arr, n);
-    cout << "\nArray after removing duplicates : ";
-    for(int i = 0 ; i < n ; i++)
-      cout << Arr[i] << " ";
+    vector<int> V = {0, 0, 1, 1, 2, 3, 3, 4, 4, 4, 5};
+    int n = removeDuplicates(V);
+    for (int i = 0; i < n; i++)
+        cout << V[i] << " ";
     return 0;
 }
-//End of program

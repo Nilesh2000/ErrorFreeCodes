@@ -20,8 +20,8 @@ Input data: 1, 4, 1, 2, 7, 5, 2
 
    Output:    1  1  2  2  4  5  7
 
-Time Complexity : O(N + Range) ~ O(Range)
-Space Complexity : O(N + Range) ~ O(Range)
+Time Complexity : O(N + Range)
+Space Complexity : O(N + Range)
 
 We can also apply this sorting algorithm to sort strings since strings can have only a maximum of 255 unique characters.
 

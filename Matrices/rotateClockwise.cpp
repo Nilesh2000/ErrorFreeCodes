@@ -1,15 +1,15 @@
 /*
 A program to rotate a 2-dimensional matrix in the clockwise dierection.
 
+Approach:
+1. Transpose the matrix in-place
+2. Reverse each row of the matrix in-place
+
 If it is a square matrix, it can be transposed in-place.
 Otherwise we will have to allocate extra memory.
 
-Approach:
-Transpose the matrix in-place
-Reverse each row of the matrix in-place
-
 Time Complexity : O(n^2)
-Space Complexity : O(n)
+Space Complexity : O(1)
 */
 
 #include <iostream>
@@ -18,49 +18,45 @@ Space Complexity : O(n)
 
 using namespace std;
 
-//Function to print the matrix
-void printMatrix(vector<vector<int>> matrix)
+void printMatrix(vector<vector<int>> M)
 {
-    for (int i = 0; i < matrix.size(); i++)
+    for (vector<int> V : M)
     {
-        for (int j = 0; j < matrix[i].size(); j++)
-        {
-            cout << matrix[i][j] << " ";
-        }
         cout << "\n";
+        for (auto num : V)
+            cout << num << " ";
     }
+    cout << "\n";
 }
 
-void transposeMatrix(vector<vector<int>> &matrix)
+// We need to swap only non-diagonal elements in a sqaure matrix
+void transposeMatrix(vector<vector<int>> &M)
 {
-    for (int i = 0; i < matrix.size(); i++)
-        for (int j = i + 1; j < matrix[i].size(); j++)
-            swap(matrix[i][j], matrix[j][i]);
+    for (int i = 0; i < M.size(); i++)
+        for (int j = i + 1; j < M[i].size(); j++)
+            swap(M[i][j], M[j][i]);
 }
 
-void rotateClockwise(vector<vector<int>> &matrix)
+void rotateClockwise(vector<vector<int>> &M)
 {
-    transposeMatrix(matrix);
+    transposeMatrix(M);
 
-    int n = matrix.size();
+    int n = M.size();
     for (int i = 0; i < n; i++)
-        reverse(matrix[i].begin(), matrix[i].end());
+        reverse(M[i].begin(), M[i].end());
 
-    printMatrix(matrix);
+    printMatrix(M);
 }
 
-//Driver function
 int main(void)
 {
-    vector<vector<int>> Mat = {
+    vector<vector<int>> M = {
         {1, 2, 3},
         {4, 5, 6},
         {7, 8, 9}};
-    printMatrix(Mat);
 
-    cout << "\nMatrix after rotating in clockwise dierection:-\n";
-    rotateClockwise(Mat);
+    printMatrix(M);
+    rotateClockwise(M);
 
     return 0;
 }
-//End of program

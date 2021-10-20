@@ -1,12 +1,22 @@
-// Given an array consisting of N+1 elements in the range of [1,N], one element of the array occurs twice.
-// Find that duplicate element.
-
 /*
-XOR all the elemnts of the array
-XOR the result with 1 to n-1
-That will be the missing number
+Given an array consisting of N+1 elements in the range of [1,N], one element of the array occurs twice.
+Find that duplicate element.
+
+APPROACH 1:
+1. XOR all the elements of the array
+2. XOR the result with 1 to n-1
+3. That will be the duplicate number
+4. This method does not mutate the array.
 
 Time Complexity : O(2n) ~ O(n)
+Space Complexity : O(1)
+
+APPROACH 2:
+1. Use cyclic sort to place all the integers in the range of [1,N] at their correct positions.
+2. If an integer is already present at index it should be placed at, its a duplicate.
+3. Return the duplicate number
+
+Time Complexity : O(n)
 Space Complexity : O(1)
 */
 
@@ -17,16 +27,16 @@ using namespace std;
 
 int findDuplicate(vector<int> V)
 {
-    int Res = V[0];
+    int duplicateNum = 0;
     int n = V.size();
 
-    for (int i = 1; i < n; i++)
-        Res ^= V[i];
+    for (auto num : V)
+        duplicateNum ^= num;
 
     for (int i = 1; i < n; i++)
-        Res ^= i;
+        duplicateNum ^= i;
 
-    return Res;
+    return duplicateNum;
 }
 
 int findDuplicateCyclicSort(vector<int> V)
