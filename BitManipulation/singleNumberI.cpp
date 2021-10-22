@@ -26,10 +26,10 @@ using namespace std;
 int singleNumber(vector<int> V)
 {
   int n = V.size();
-  int singleNum = V[0];
+  int singleNum = 0;
 
-  for (int i = 1; i < n; i++)
-    singleNum = singleNum ^ V[i];
+  for (auto num : V)
+    singleNum = singleNum ^ num;
 
   return singleNum;
 }

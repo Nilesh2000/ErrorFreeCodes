@@ -1,5 +1,7 @@
 /*
-Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that 
+1. i != j, i != k, and j != k
+2. nums[i] + nums[j] + nums[k] == 0.
 
 Notice that the solution set must not contain duplicate triplets.
 
@@ -12,7 +14,7 @@ Time Complexity : O(N^3)
 Space Complexity : O(1)
 
 APPROACH 2:-
-1. Try and convert the problem to a two-sum problem.
+1. Reduce the problem to a two-sum problem.
 2. Fix one element and apply the two-sum problem over the remaining elements of the problem.
 3. The size of the array becomes n-1 and the sum becomes sum - a[i].
 
@@ -25,7 +27,7 @@ APPROACH 3:-
 3. So, we can use the 2-pointer approach.
 4. Stop
 
-Time Complexity : O(N*Log(N) + O(N^2)
+Time Complexity : O(NLogN + N^2)
 Space Complexity : O(1)
 */
 
@@ -37,10 +39,10 @@ using namespace std;
 
 vector<vector<int>> threeSum(vector<int> V)
 {
-    vector<vector<int>> Res;
+    vector<vector<int>> triplet;
     int n = V.size();
     if (n < 3)
-        return Res;
+        return triplet;
 
     sort(V.begin(), V.end());
     int Target = 0;
@@ -60,7 +62,7 @@ vector<vector<int>> threeSum(vector<int> V)
 
             if (Sum == Target)
             {
-                Res.push_back({V[i], V[Left], V[Right]});
+                triplet.push_back({V[i], V[Left], V[Right]});
 
                 // Ignore duplicates
                 while (Left < Right && V[Left] == V[Left + 1])
@@ -78,19 +80,21 @@ vector<vector<int>> threeSum(vector<int> V)
                 Left++;
         }
     }
-    return Res;
+    return triplet;
 }
 
 int main(void)
 {
     vector<int> V = {-1, 0, 1, 2, -1, -4};
     vector<vector<int>> R = threeSum(V);
-    for (int i = 0; i < R.size(); i++)
+
+    for (auto triplet : R)
     {
         cout << "[ ";
-        for (int j = 0; j < 3; j++)
-            cout << R[i][j] << " ";
+        for (auto num : triplet)
+            cout << num << " ";
         cout << "]\n";
     }
+
     return 0;
 }
